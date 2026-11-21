@@ -1,0 +1,22 @@
+# secrets and local state: never in the image
+.env
+*.sqlite3
+data/app.sqlite3*
+
+# environments and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.git/
+
+# not needed at runtime: raw sources, unused embedding caches, per-case evaluation CSVs, the human review sheets
+data/raw/
+data/processed/chunking/
+data/processed/embeddings_local_*.npy
+data/processed/embeddings_gemini1_*.npy
+evals/results/*.csv
+evals/review/
+*.png

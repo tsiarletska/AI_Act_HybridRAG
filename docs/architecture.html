@@ -1,0 +1,592 @@
+<title>AI Act Assistant Architecture</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one reading column for prose, figures break out to full width; each figure states one claim. */
+:root {
+  --bg: #f4f6f9; --panel: #ffffff; --ink: #142030; --muted: #5a6879; --line: #cfd7e1; --edge: #3b4a5c;
+  --accent: #1f3f9e;                       /* EU blue: the main answer model */
+  --t-none: #237a52; --t-none-soft: #e2f3ea;   /* no API call */
+  --t-emb: #6a4fc4;  --t-emb-soft: #ece7fa;    /* embedding call */
+  --t-cheap: #a5650d; --t-cheap-soft: #fbefd9; /* cheap LLM (guard) */
+  --t-main: #1f3f9e; --t-main-soft: #e3e9f9;   /* main LLM (answer) */
+  --refuse: #b0412e;
+  --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f141b; --panel: #172030; --ink: #e5ebf3; --muted: #9aa8b9; --line: #2f3c4f; --edge: #b4c0cf;
+  --accent: #8fa8ff; --t-none: #6fd2a2; --t-none-soft: #173328; --t-emb: #b9a6ff; --t-emb-soft: #2a2450;
+  --t-cheap: #f0b45a; --t-cheap-soft: #3a2a12; --t-main: #8fa8ff; --t-main-soft: #1d2a52; --refuse: #ff8a73;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0f141b; --panel: #172030; --ink: #e5ebf3; --muted: #9aa8b9; --line: #2f3c4f; --edge: #b4c0cf;
+  --accent: #8fa8ff; --t-none: #6fd2a2; --t-none-soft: #173328; --t-emb: #b9a6ff; --t-emb-soft: #2a2450;
+  --t-cheap: #f0b45a; --t-cheap-soft: #3a2a12; --t-main: #8fa8ff; --t-main-soft: #1d2a52; --refuse: #ff8a73;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.6 var(--sans); }
+.wrap { max-width: 1220px; margin: 0 auto; padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 34px; }
+.prose { max-width: 70ch; }
+h1 { font-size: clamp(26px, 3.4vw, 36px); line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.01em; text-wrap: balance; }
+h2 { font-size: 21px; margin: 0 0 6px; text-wrap: balance; }
+p { margin: 0 0 10px; }
+.eyebrow { font: 500 12px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.lede { color: var(--muted); font-size: 16.5px; }
+code, .mono { font-family: var(--mono); font-size: .92em; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 14px; font-size: 13px; color: var(--muted); align-items: center; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 999px; font: 500 12px var(--mono); }
+.c-none { background: var(--t-none-soft); color: var(--t-none); }
+.c-emb { background: var(--t-emb-soft); color: var(--t-emb); }
+.c-cheap { background: var(--t-cheap-soft); color: var(--t-cheap); }
+.c-main { background: var(--t-main-soft); color: var(--t-main); }
+.c-refuse { color: var(--refuse); }
+
+figure { margin: 0; display: grid; gap: 10px; }
+.scroll { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.scroll svg { display: block; width: 100%; height: auto; min-width: 960px; color: var(--edge); }
+.scroll.narrow svg { min-width: 720px; }
+figcaption { font-size: 13.5px; color: var(--muted); max-width: 90ch; }
+
+/* SVG classes (styled from the page so both themes work) */
+.box { fill: var(--panel); stroke: var(--line); stroke-width: 1.3; }
+.box.term { fill: var(--bg); stroke: var(--refuse); stroke-dasharray: 4 3; }
+.box.planned { stroke-dasharray: 5 4; stroke: var(--muted); }
+.box.store { fill: var(--bg); }
+.ttl { font: 600 13px var(--sans); fill: var(--ink); }
+.sub { font: 400 11.5px var(--sans); fill: var(--muted); }
+.ann { font: 400 11px var(--mono); fill: var(--muted); }
+.ann.k { fill: var(--ink); }
+.lbl { font: 500 11px var(--mono); fill: var(--muted); }
+.lbl.refuse { fill: var(--refuse); }
+.lbl.main { fill: var(--t-main); }
+.num { font: 500 11px var(--mono); fill: var(--muted); }
+.edge { stroke: var(--edge); stroke-width: 1.4; fill: none; }
+.edge.exit { stroke: var(--refuse); stroke-dasharray: 4 3; }
+.edge.stream { stroke: var(--t-main); stroke-width: 1.8; }
+.edge.dash { stroke-dasharray: 5 4; }
+.ah { fill: var(--edge); } .ah-x { fill: var(--refuse); } .ah-s { fill: var(--t-main); }
+.chipr-none { fill: var(--t-none-soft); } .chipt-none { fill: var(--t-none); }
+.chipr-emb { fill: var(--t-emb-soft); } .chipt-emb { fill: var(--t-emb); }
+.chipr-cheap { fill: var(--t-cheap-soft); } .chipt-cheap { fill: var(--t-cheap); }
+.chipr-main { fill: var(--t-main-soft); } .chipt-main { fill: var(--t-main); }
+.chipt { font: 500 10.5px var(--mono); }
+
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.tablewrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th { font: 500 12px var(--mono); color: var(--muted); letter-spacing: .03em; text-transform: uppercase; }
+td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.two { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+.big { font: 600 34px/1.1 var(--mono); color: var(--t-cheap); margin: 4px 0 6px; font-variant-numeric: tabular-nums; }
+.panel ul { margin: 6px 0 0; padding-left: 20px; }
+.panel li { margin-bottom: 6px; }
+.note { font-size: 13px; color: var(--muted); }
+.configs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 12px 0; }
+.cfg { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+.cfg b { display: block; font-family: var(--mono); font-size: 13px; margin-bottom: 4px; }
+@media (max-width: 820px) { .two, .configs { grid-template-columns: 1fr; } }
+</style>
+
+<div class="wrap">
+
+<header class="prose">
+  <div class="eyebrow">EU AI Act · Regulation (EU) 2024/1689 · RAG assistant</div>
+  <h1>AI Act Assistant Architecture</h1>
+  <p style="padding:8px 12px;border:1px solid #d4d4d8;border-radius:8px;background:#fafafa;font-size:14px"><b>First version (2026-11-19)</b>, drawn before the evaluation. Some details changed later: the generation model was chosen by evaluation (<code>gemini-3.8-flash</code>, no reasoning), Mistral was evaluated but is not used, and the multilingual flow was not built. The current system is drawn on the app's Scheme page (<code>scheme/</code>).</p>
+  <p class="lede">A question passes through cheap checks first. The answer model (<span class="mono">gemini-3.8-flash</span>) runs only for questions that are about the Act. The figures below show the steps, what each one costs, and how the evaluation will measure the overhead of the gate.</p>
+  <div class="legend">
+    <span>Cost of a step:</span>
+    <span class="chip c-none">no API call</span>
+    <span class="chip c-emb">embedding</span>
+    <span class="chip c-cheap">cheap LLM</span>
+    <span class="chip c-main">main LLM</span>
+    <span class="c-refuse">- - - early exit</span>
+  </div>
+</header>
+
+<!-- ======================================================= FIGURE 1: request path -->
+<section>
+  <div class="prose">
+    <div class="eyebrow">1 · Online</div>
+    <h2>What happens to one question</h2>
+  </div>
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 1180 470" role="img" aria-label="Request path: pre-filter, relevance floor and guard can stop a question before the answer model; only questions that pass all three reach retrieval and the answer model, which streams back to the user. Memory feeds history to the guard and the answer model.">
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+          <marker id="ax" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-x" d="M0 0L10 5L0 10z"/></marker>
+          <marker id="as" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-s" d="M0 0L10 5L0 10z"/></marker>
+        </defs>
+
+        <!-- stream back to the user -->
+        <path class="edge stream" d="M952 150 V44 H66 V146" marker-end="url(#as)"/>
+        <path class="edge stream" d="M802 150 V44"/>
+        <text class="lbl main" x="509" y="34" text-anchor="middle">answer streams back token by token (SSE), then the checked citations and cost</text>
+
+        <!-- user -->
+        <rect class="box" x="16" y="150" width="100" height="96" rx="10"/>
+        <text class="ttl" x="66" y="190" text-anchor="middle">You</text>
+        <text class="sub" x="66" y="208" text-anchor="middle">browser</text>
+
+        <!-- main row arrows -->
+        <line class="edge" x1="116" y1="198" x2="134" y2="198" marker-end="url(#a)"/>
+        <line class="edge" x1="268" y1="198" x2="284" y2="198" marker-end="url(#a)"/>
+        <line class="edge" x1="418" y1="198" x2="434" y2="198" marker-end="url(#a)"/>
+        <line class="edge" x1="568" y1="198" x2="584" y2="198" marker-end="url(#a)"/>
+        <line class="edge" x1="718" y1="198" x2="734" y2="198" marker-end="url(#a)"/>
+        <line class="edge" x1="868" y1="198" x2="884" y2="198" marker-end="url(#a)"/>
+        <line class="edge" x1="1018" y1="198" x2="1034" y2="198" marker-end="url(#a)"/>
+
+        <!-- 1 pre-filter -->
+        <rect class="box" x="136" y="150" width="132" height="96" rx="10"/>
+        <text class="num" x="148" y="170">1</text><text class="ttl" x="162" y="170">Pre-filter</text>
+        <text class="sub" x="148" y="190">code &amp; injection</text>
+        <text class="sub" x="148" y="205">regex, length cap</text>
+        <rect class="chipr-none" x="148" y="218" width="84" height="18" rx="9"/><text class="chipt chipt-none" x="190" y="231" text-anchor="middle">no API call</text>
+        <text class="ann k" x="164" y="268">&lt;1 ms</text><text class="ann" x="164" y="283">$0</text>
+
+        <!-- 2 floor -->
+        <rect class="box" x="286" y="150" width="132" height="96" rx="10"/>
+        <text class="num" x="298" y="170">2</text><text class="ttl" x="312" y="170">Relevance floor</text>
+        <text class="sub" x="298" y="190">query embedding</text>
+        <text class="sub" x="298" y="205">sim &lt; 0.64 → stop</text>
+        <rect class="chipr-emb" x="298" y="218" width="76" height="18" rx="9"/><text class="chipt chipt-emb" x="336" y="231" text-anchor="middle">embedding</text>
+        <text class="ann k" x="314" y="268">~0.3 s</text><text class="ann" x="314" y="283">≈$0.000004</text>
+
+        <!-- 3 guard -->
+        <rect class="box" x="436" y="150" width="132" height="96" rx="10"/>
+        <text class="num" x="448" y="170">3</text><text class="ttl" x="462" y="170">Guard</text>
+        <text class="sub" x="448" y="190">Flash-Lite rewrites</text>
+        <text class="sub" x="448" y="205">+ classifies scope</text>
+        <rect class="chipr-cheap" x="448" y="218" width="76" height="18" rx="9"/><text class="chipt chipt-cheap" x="486" y="231" text-anchor="middle">cheap LLM</text>
+        <text class="ann k" x="464" y="268">0.6–1.0 s</text><text class="ann" x="464" y="283">≈$0.0003</text>
+
+        <!-- 4 retrieve -->
+        <rect class="box" x="586" y="150" width="132" height="96" rx="10"/>
+        <text class="num" x="598" y="170">4</text><text class="ttl" x="612" y="170">Retrieve</text>
+        <text class="sub" x="598" y="190">resolver + BM25</text>
+        <text class="sub" x="598" y="205">+ vectors (RRF)</text>
+        <rect class="chipr-emb" x="598" y="218" width="76" height="18" rx="9"/><text class="chipt chipt-emb" x="636" y="231" text-anchor="middle">embedding</text>
+        <text class="ann k" x="598" y="268">~0.3 s</text><text class="ann" x="598" y="283">8 of 893 chunks</text>
+
+        <!-- 5 answer -->
+        <rect class="box" x="736" y="150" width="132" height="96" rx="10" style="stroke: var(--t-main); stroke-width: 1.8"/>
+        <text class="num" x="748" y="170">5</text><text class="ttl" x="762" y="170">Answer</text>
+        <text class="sub" x="748" y="190">gemini-3.8-flash</text>
+        <text class="sub" x="748" y="205">cites [Art. 5(1)]</text>
+        <rect class="chipr-main" x="748" y="218" width="70" height="18" rx="9"/><text class="chipt chipt-main" x="783" y="231" text-anchor="middle">main LLM</text>
+        <text class="ann k" x="748" y="268">4–7 s</text><text class="ann" x="748" y="283">$0.002–0.004</text>
+
+        <!-- 6 post-check -->
+        <rect class="box" x="886" y="150" width="132" height="96" rx="10"/>
+        <text class="num" x="898" y="170">6</text><text class="ttl" x="912" y="170">Post-check</text>
+        <text class="sub" x="898" y="190">citations in the</text>
+        <text class="sub" x="898" y="205">retrieved set?</text>
+        <rect class="chipr-none" x="898" y="218" width="84" height="18" rx="9"/><text class="chipt chipt-none" x="940" y="231" text-anchor="middle">no API call</text>
+        <text class="ann k" x="898" y="268">&lt;1 ms</text><text class="ann" x="898" y="283">flags bad ones</text>
+
+        <!-- 7 save -->
+        <rect class="box" x="1036" y="150" width="132" height="96" rx="10"/>
+        <text class="num" x="1048" y="170">7</text><text class="ttl" x="1062" y="170">Save turn</text>
+        <text class="sub" x="1048" y="190">SQLite: text,</text>
+        <text class="sub" x="1048" y="205">citations, cost</text>
+        <rect class="chipr-none" x="1048" y="218" width="84" height="18" rx="9"/><text class="chipt chipt-none" x="1090" y="231" text-anchor="middle">no API call</text>
+        <text class="ann k" x="1048" y="268">&lt;5 ms</text>
+
+        <!-- early exits -->
+        <line class="edge exit" x1="154" y1="246" x2="154" y2="334" marker-end="url(#ax)"/>
+        <line class="edge exit" x1="304" y1="246" x2="304" y2="334" marker-end="url(#ax)"/>
+        <line class="edge exit" x1="454" y1="246" x2="454" y2="334" marker-end="url(#ax)"/>
+        <rect class="box term" x="136" y="336" width="110" height="56" rx="8"/>
+        <text class="lbl refuse" x="146" y="353">code · injection</text><text class="sub" x="146" y="368">canned reply</text><text class="ann k" x="146" y="383">0 API calls</text>
+        <rect class="box term" x="286" y="336" width="110" height="56" rx="8"/>
+        <text class="lbl refuse" x="296" y="353">clearly off-topic</text><text class="sub" x="296" y="368">polite refusal</text><text class="ann k" x="296" y="383">1 embedding</text>
+        <rect class="box term" x="436" y="336" width="110" height="56" rx="8"/>
+        <text class="lbl refuse" x="446" y="353">out / ambiguous</text><text class="sub" x="446" y="368">refuse or clarify</text><text class="ann k" x="446" y="383">1 cheap call</text>
+        <path class="edge exit" d="M191 392 V430 M341 392 V430 M491 392 V430 H66 V250" marker-end="url(#ax)"/>
+        <text class="lbl refuse" x="96" y="452">reply goes back; the answer model is never called</text>
+
+        <!-- memory -->
+        <rect class="box store" x="736" y="336" width="432" height="56" rx="8"/>
+        <text class="ttl" x="752" y="358">Conversation memory · SQLite</text>
+        <text class="sub" x="752" y="378">turns · rewritten question · cited provisions · tokens and cost</text>
+        <path class="edge" d="M1102 246 V334" marker-end="url(#a)"/>
+        <text class="lbl" x="1110" y="304">writes</text>
+        <path class="edge" d="M850 336 V250" marker-end="url(#a)"/>
+        <text class="lbl" x="858" y="304">history</text>
+        <path class="edge" d="M736 364 H556 V250" marker-end="url(#a)"/>
+        <text class="lbl" x="564" y="318">history</text>
+      </svg>
+    </div>
+    <figcaption>Steps 1–3 can stop a question before any expensive call, so only in-scope questions reach the answer model. On a follow-up ("and deployers?"), the floor is checked after the guard, on the rewritten question. If the embedding API is down, retrieval falls back to keywords and the floor is skipped. Timings and costs come from single requests measured on 18 Nov 2026 at today's prices; the evaluation below will replace them with medians and 95th percentiles.</figcaption>
+  </figure>
+</section>
+
+<!-- ======================================================= cost table + break-even -->
+<section class="two">
+  <div>
+    <div class="eyebrow">2 · Cost per question</div>
+    <h2>What each path costs</h2>
+    <p class="note">Indicative, from requests measured in this session. Prices per 1M tokens: Flash-Lite $0.30 in / $2.50 out; 3.8-flash $0.75 / $3.75 until 31 Dec 2026, then $1.50 / $7.50.</p>
+    <div class="tablewrap">
+      <table>
+        <tr><th>Question</th><th>Calls</th><th>Wait before the answer starts</th><th>Cost</th></tr>
+        <tr><td>In scope ("What is a deployer?")</td><td>2 embeddings, guard, answer</td><td class="n">+0.9–1.6 s</td><td class="n">≈$0.0013–0.005</td></tr>
+        <tr><td>Off-topic, near the domain (GDPR)</td><td>1 embedding, guard</td><td class="n">~1.3 s total</td><td class="n">≈$0.0003</td></tr>
+        <tr><td>Clearly off-topic (weather)</td><td>1 embedding</td><td class="n">~0.3 s total</td><td class="n">≈$0.000004</td></tr>
+        <tr><td>Code request or injection</td><td>none</td><td class="n">&lt;1 ms</td><td class="n">$0</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="eyebrow">Does the guard pay for itself?</div>
+    <div class="big">≈ 1 in 9</div>
+    <p>The guard costs about $0.0003 on every question that passes the floor. Each time it stops an off-topic question, it saves an answer call of about $0.0025. It pays for itself once roughly <b>11%</b> of the questions reaching it would have been off-topic. From 1 January, when the answer model doubles in price, that drops to about <b>6%</b>.</p>
+    <ul class="note">
+      <li>It is more than a filter: it also rewrites follow-ups into standalone questions, and retrieval needs that anyway.</li>
+      <li>Its real price is time: about 1 s before the first answer token.</li>
+      <li>These are single-request estimates; experiment E7 below measures them properly.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ======================================================= FIGURE 2: build + eval -->
+<section>
+  <div class="prose">
+    <div class="eyebrow">3 · Offline and evaluation</div>
+    <h2>Built once, then tested with the same code</h2>
+  </div>
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 1180 290" role="img" aria-label="Offline build: EUR-Lex HTML is parsed, chunked into 893 structural chunks, embedded once and indexed. The evaluation runs question sets through the same chat pipeline, checks answers deterministically, meters latency and cost per step, and publishes results to the Evaluation tab.">
+        <defs>
+          <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+        </defs>
+        <text class="lbl" x="16" y="28">BUILD ONCE</text>
+        <g>
+          <rect class="box" x="16" y="42" width="160" height="74" rx="10"/><text class="ttl" x="30" y="66">EUR-Lex OJ HTML</text><text class="sub" x="30" y="85">original 2024 text</text><text class="sub" x="30" y="101">sha256-pinned</text>
+          <rect class="box" x="212" y="42" width="160" height="74" rx="10"/><text class="ttl" x="226" y="66">Parser</text><text class="sub" x="226" y="85">OJ anchors: art_N,</text><text class="sub" x="226" y="101">NNN.PPP, anx_X</text>
+          <rect class="box" x="408" y="42" width="160" height="74" rx="10"/><text class="ttl" x="422" y="66">Structural chunker</text><text class="sub" x="422" y="85">paragraph → point</text><text class="sub" x="422" y="101">one per definition</text>
+          <rect class="box" x="604" y="42" width="160" height="74" rx="10"/><text class="ttl" x="618" y="66">893 chunks</text><text class="sub" x="618" y="85">label + EUR-Lex link</text><text class="sub" x="618" y="101">+ chapter header</text>
+          <rect class="box" x="800" y="42" width="160" height="74" rx="10"/><text class="ttl" x="814" y="66">Embed once</text><text class="sub" x="814" y="85">gemini-embedding-2</text><text class="sub" x="814" y="101">768-d, cached</text>
+          <rect class="box" x="996" y="42" width="160" height="74" rx="10"/><text class="ttl" x="1010" y="66">Index</text><text class="sub" x="1010" y="85">BM25 + vectors</text><text class="sub" x="1010" y="101">+ reference resolver</text>
+          <line class="edge" x1="176" y1="79" x2="210" y2="79" marker-end="url(#b)"/>
+          <line class="edge" x1="372" y1="79" x2="406" y2="79" marker-end="url(#b)"/>
+          <line class="edge" x1="568" y1="79" x2="602" y2="79" marker-end="url(#b)"/>
+          <line class="edge" x1="764" y1="79" x2="798" y2="79" marker-end="url(#b)"/>
+          <line class="edge" x1="960" y1="79" x2="994" y2="79" marker-end="url(#b)"/>
+        </g>
+        <path class="edge" d="M1076 116 V148 H292 V188" marker-end="url(#b)"/>
+        <text class="lbl" x="684" y="142" text-anchor="middle">the same index serves the chat and the evaluation</text>
+
+        <text class="lbl" x="16" y="178">EVALUATE</text>
+        <g>
+          <rect class="box" x="16" y="190" width="160" height="74" rx="10"/><text class="ttl" x="30" y="214">Question sets</text><text class="sub" x="30" y="233">dev: tune on it</text><text class="sub" x="30" y="249">test: frozen, run once</text>
+          <rect class="box" x="212" y="190" width="160" height="74" rx="10"/><text class="ttl" x="226" y="214">ChatService.ask</text><text class="sub" x="226" y="233">the same pipeline</text><text class="sub" x="226" y="249">as the chat UI</text>
+          <rect class="box" x="408" y="190" width="160" height="74" rx="10"/><text class="ttl" x="422" y="214">Deterministic checks</text><text class="sub" x="422" y="233">regex must / must-not</text><text class="sub" x="422" y="249">citations valid?</text>
+          <rect class="box planned" x="604" y="190" width="160" height="74" rx="10"/><text class="ttl" x="618" y="214">Stage meters</text><text class="sub" x="618" y="233">latency per step</text><text class="sub" x="618" y="249">tokens → cost</text>
+          <rect class="box" x="800" y="190" width="160" height="74" rx="10"/><text class="ttl" x="814" y="214">Results</text><text class="sub" x="814" y="233">evals/results/*.json</text><text class="sub" x="814" y="249">per config and split</text>
+          <rect class="box planned" x="996" y="190" width="160" height="74" rx="10"/><text class="ttl" x="1010" y="214">Evaluation tab</text><text class="sub" x="1010" y="233">+ DECISION.md</text><text class="sub" x="1010" y="249">Gemini vs Mistral</text>
+          <line class="edge" x1="176" y1="227" x2="210" y2="227" marker-end="url(#b)"/>
+          <line class="edge" x1="372" y1="227" x2="406" y2="227" marker-end="url(#b)"/>
+          <line class="edge" x1="568" y1="227" x2="602" y2="227" marker-end="url(#b)"/>
+          <line class="edge" x1="764" y1="227" x2="798" y2="227" marker-end="url(#b)"/>
+          <line class="edge" x1="960" y1="227" x2="994" y2="227" marker-end="url(#b)"/>
+        </g>
+      </svg>
+    </div>
+    <figcaption>The evaluation calls the same <span class="mono">ChatService</span> the chat uses, so what is measured is what users get. Dashed boxes are not built yet: per-step timers and the model-selection decision.</figcaption>
+  </figure>
+</section>
+
+<!-- ======================================================= E7 -->
+<section class="prose" style="max-width: 1000px">
+  <div class="eyebrow">4 · Planned experiment E7</div>
+  <h2>Measuring what the gate adds</h2>
+  <p>The same end-to-end question set (in-scope, near-domain off-topic, clearly off-topic, follow-ups) runs through three configurations. Only the gate changes; retrieval and the answer model stay fixed.</p>
+  <div class="configs">
+    <div class="cfg"><b>A · full gate</b>pre-filter, floor, guard, answer. What runs today.</div>
+    <div class="cfg"><b>B · no guard</b>pre-filter, floor, answer. The answer prompt refuses off-topic questions itself; follow-ups go in raw with the history.</div>
+    <div class="cfg"><b>C · no floor</b>pre-filter, guard, answer. Shows what the free embedding check saves.</div>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <tr><th>Measured per configuration</th><th>How</th></tr>
+      <tr><td>Time to first answer token and total time (p50, p95)</td><td>timers around each step, in <span class="mono">ChatService</span></td></tr>
+      <tr><td>Tokens and cost per step, and per 100 questions</td><td>usage metadata × <span class="mono">pricing.yaml</span>, at a traffic mix of 80/20 and 60/40 in-scope/off-topic</td></tr>
+      <tr><td>Off-topic stopped, and at which step</td><td>labelled cases; gate ≥ 95%</td></tr>
+      <tr><td>In-scope questions wrongly refused</td><td>labelled cases; gate ≤ 5%</td></tr>
+      <tr><td>Follow-up answer quality</td><td>regex checks on multi-turn cases (needs the rewrite)</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ======================================================= FIGURE 3: deployment -->
+<section>
+  <div class="prose">
+    <div class="eyebrow">5 · Deployment</div>
+    <h2>Where it runs</h2>
+  </div>
+  <figure>
+    <div class="scroll narrow">
+      <svg viewBox="0 0 900 196" role="img" aria-label="Deployment: the browser talks to a Hugging Face Space running the FastAPI app in Docker; the Space calls the Gemini API, and the Mistral API if Mistral wins; GitHub Actions tests and deploys to the Space.">
+        <defs>
+          <marker id="c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+        </defs>
+        <rect class="box" x="16" y="30" width="150" height="64" rx="10"/><text class="ttl" x="30" y="56">Browser</text><text class="sub" x="30" y="75">4-tab web app</text>
+        <line class="edge" x1="166" y1="62" x2="248" y2="62" marker-end="url(#c)" marker-start="url(#c)"/>
+        <text class="lbl" x="207" y="54" text-anchor="middle">HTTPS · SSE</text>
+        <rect class="box" x="250" y="30" width="300" height="64" rx="10"/><text class="ttl" x="264" y="56">Hugging Face Space · Docker</text><text class="sub" x="264" y="75">FastAPI · static UI · SQLite · index · API keys as secrets</text>
+        <line class="edge" x1="550" y1="62" x2="648" y2="62" marker-end="url(#c)"/>
+        <text class="lbl" x="599" y="54" text-anchor="middle">API calls</text>
+        <rect class="box" x="650" y="30" width="230" height="64" rx="10"/><text class="ttl" x="664" y="56">Google Gemini API</text><text class="sub" x="664" y="75">embeddings · guard · answer</text>
+        <path class="edge dash" d="M550 82 H610 V150 H648" marker-end="url(#c)"/>
+        <text class="lbl" x="618" y="140">if it wins</text>
+        <rect class="box planned" x="650" y="126" width="230" height="50" rx="10"/><text class="ttl" x="664" y="148">Mistral API</text><text class="sub" x="664" y="166">answer model candidate</text>
+        <rect class="box" x="250" y="126" width="140" height="50" rx="10"/><text class="ttl" x="264" y="148">GitHub repo</text><text class="sub" x="264" y="166">source of truth</text>
+        <line class="edge" x1="390" y1="151" x2="408" y2="151" marker-end="url(#c)"/>
+        <rect class="box" x="410" y="126" width="140" height="50" rx="10"/><text class="ttl" x="424" y="148">GitHub Actions</text><text class="sub" x="424" y="166">tests · retrieval eval</text>
+        <path class="edge" d="M480 126 V96" marker-end="url(#c)"/>
+        <text class="lbl" x="488" y="116">deploy on main</text>
+      </svg>
+    </div>
+    <figcaption>One container serves the API and the web app. Only the Gemini key is needed today; the Mistral key is needed only for the comparison or if Mistral is chosen. Railway runs the same Dockerfile as a fallback.</figcaption>
+  </figure>
+</section>
+
+<!-- ======================================================= FIGURE 4: multilingual (planned) -->
+<section>
+  <div class="prose">
+    <div class="eyebrow">6 · Planned · multilingual pilot</div>
+    <h2>Five languages, one English index</h2>
+    <p>The Act is published in 24 equally authentic languages with the same structure, so Art. 5(1)(f) has the same ID and EUR-Lex anchor in every version. The pilot covers English, Lithuanian, Polish, Finnish and French. Search always runs in English; only the text shown to the answer model, and the answer itself, switch to the user's language. Example below: a Lithuanian question.</p>
+  </div>
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 1180 540" role="img" aria-label="Multilingual request path: the question passes the pre-filter and a language check; for non-English input the guard detects the language and rewrites the question into English using an official term glossary, then the relevance floor runs on the English rewrite and retrieval searches the single English index. The retrieved chunk IDs are swapped for the official text in the user's language from an aligned text store, and the answer model answers in that language in the style chosen by the toggle. A post-check verifies citations, answer language and verbatim quotes before the answer is shown with localised labels and EUR-Lex links.">
+        <defs>
+          <marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+          <marker id="mx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-x" d="M0 0L10 5L0 10z"/></marker>
+          <marker id="ms" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-s" d="M0 0L10 5L0 10z"/></marker>
+        </defs>
+
+        <!-- stores (top) -->
+        <rect class="box store" x="482" y="16" width="150" height="56" rx="8"/>
+        <text class="ttl" x="494" y="38">Term glossary</text><text class="sub" x="494" y="56">Art. 3 definitions × 5</text>
+        <line class="edge" x1="557" y1="72" x2="557" y2="118" marker-end="url(#m)"/>
+        <text class="lbl" x="563" y="100">official terms</text>
+
+        <rect class="box store" x="826" y="16" width="150" height="56" rx="8"/>
+        <text class="ttl" x="838" y="38">English index</text><text class="sub" x="838" y="56">893 vectors, EN only</text>
+        <line class="edge" x1="901" y1="72" x2="901" y2="118" marker-end="url(#m)"/>
+
+        <rect class="box store" x="998" y="16" width="150" height="56" rx="8"/>
+        <text class="ttl" x="1010" y="38">Aligned texts</text><text class="sub" x="1010" y="56">(language, ID) → text</text>
+        <line class="edge" x1="1073" y1="72" x2="1073" y2="118" marker-end="url(#m)"/>
+
+        <!-- English bypass note -->
+        <path class="edge dash" d="M385 120 V92 H325"/>
+        <text class="lbl" x="318" y="86" text-anchor="end">English: unchanged path (fig. 1)</text>
+
+        <!-- user -->
+        <rect class="box" x="16" y="120" width="100" height="100" rx="10"/>
+        <text class="ttl" x="66" y="158" text-anchor="middle">You</text>
+        <text class="sub" x="66" y="176" text-anchor="middle">asks in</text>
+        <text class="sub" x="66" y="191" text-anchor="middle">Lithuanian</text>
+
+        <!-- row 1 arrows -->
+        <line class="edge" x1="116" y1="170" x2="136" y2="170" marker-end="url(#m)"/>
+        <line class="edge" x1="288" y1="170" x2="308" y2="170" marker-end="url(#m)"/>
+        <line class="edge" x1="460" y1="170" x2="480" y2="170" marker-end="url(#m)"/>
+        <line class="edge" x1="632" y1="170" x2="652" y2="170" marker-end="url(#m)"/>
+        <line class="edge" x1="804" y1="170" x2="824" y2="170" marker-end="url(#m)"/>
+        <line class="edge" x1="976" y1="170" x2="996" y2="170" marker-end="url(#m)"/>
+
+        <!-- 1 pre-filter -->
+        <rect class="box" x="138" y="120" width="150" height="100" rx="10"/>
+        <text class="num" x="150" y="140">1</text><text class="ttl" x="164" y="140">Pre-filter</text>
+        <text class="sub" x="150" y="160">code &amp; injection</text>
+        <text class="sub" x="150" y="175">patterns in English</text>
+        <rect class="chipr-none" x="150" y="190" width="84" height="18" rx="9"/><text class="chipt chipt-none" x="192" y="203" text-anchor="middle">no API call</text>
+        <text class="ann" x="150" y="112">built</text>
+
+        <!-- 2 language check -->
+        <rect class="box" x="310" y="120" width="150" height="100" rx="10"/>
+        <text class="num" x="322" y="140">2</text><text class="ttl" x="336" y="140">Language check</text>
+        <text class="sub" x="322" y="160">small detector</text>
+        <text class="sub" x="322" y="175">decides the order</text>
+        <rect class="chipr-none" x="322" y="190" width="84" height="18" rx="9"/><text class="chipt chipt-none" x="364" y="203" text-anchor="middle">no API call</text>
+        <text class="ann" x="322" y="112">to build</text>
+
+        <!-- 3 guard -->
+        <rect class="box" x="482" y="120" width="150" height="100" rx="10"/>
+        <text class="num" x="494" y="140">3</text><text class="ttl" x="508" y="140">Guard</text>
+        <text class="sub" x="494" y="160">language, scope,</text>
+        <text class="sub" x="494" y="175">English rewrite</text>
+        <rect class="chipr-cheap" x="494" y="190" width="76" height="18" rx="9"/><text class="chipt chipt-cheap" x="532" y="203" text-anchor="middle">cheap LLM</text>
+        <text class="ann k" x="590" y="203">0.8 s</text>
+        <text class="ann" x="549" y="112" text-anchor="end" style="fill: var(--t-none)">tested · E8</text>
+
+        <!-- 4 floor -->
+        <rect class="box" x="654" y="120" width="150" height="100" rx="10"/>
+        <text class="num" x="666" y="140">4</text><text class="ttl" x="680" y="140">Relevance floor</text>
+        <text class="sub" x="666" y="160">on the English</text>
+        <text class="sub" x="666" y="175">rewrite, &lt; 0.64 stops</text>
+        <rect class="chipr-emb" x="666" y="190" width="76" height="18" rx="9"/><text class="chipt chipt-emb" x="704" y="203" text-anchor="middle">embedding</text>
+        <text class="ann" x="654" y="112" style="fill: var(--t-none)">tested · E8</text>
+
+        <!-- 5 retrieve -->
+        <rect class="box" x="826" y="120" width="150" height="100" rx="10"/>
+        <text class="num" x="838" y="140">5</text><text class="ttl" x="852" y="140">Retrieve</text>
+        <text class="sub" x="838" y="160">English index, as today</text>
+        <text class="sub" x="838" y="175">→ 8 chunk IDs</text>
+        <rect class="chipr-emb" x="838" y="190" width="76" height="18" rx="9"/><text class="chipt chipt-emb" x="876" y="203" text-anchor="middle">embedding</text>
+        <text class="ann" x="909" y="112" style="fill: var(--t-none)">tested · E8</text>
+
+        <!-- 6 swap -->
+        <rect class="box" x="998" y="120" width="150" height="100" rx="10"/>
+        <text class="num" x="1010" y="140">6</text><text class="ttl" x="1024" y="140">Swap text</text>
+        <text class="sub" x="1010" y="160">same IDs → official</text>
+        <text class="sub" x="1010" y="175">Lithuanian text</text>
+        <rect class="chipr-none" x="1010" y="190" width="84" height="18" rx="9"/><text class="chipt chipt-none" x="1052" y="203" text-anchor="middle">no API call</text>
+        <text class="ann" x="1081" y="112">to build</text>
+
+        <!-- exits -->
+        <line class="edge exit" x1="160" y1="220" x2="160" y2="260" marker-end="url(#mx)"/>
+        <text class="lbl refuse" x="168" y="256">code · injection</text>
+        <line class="edge exit" x1="504" y1="220" x2="504" y2="260" marker-end="url(#mx)"/>
+        <text class="lbl refuse" x="512" y="256">out · ambiguous</text>
+        <line class="edge exit" x1="676" y1="220" x2="676" y2="260" marker-end="url(#mx)"/>
+        <text class="lbl refuse" x="684" y="256">off-topic</text>
+        <text class="sub" x="160" y="282">Refusals and clarifying questions are written in the detected language.</text>
+
+        <!-- swap -> answer -->
+        <line class="edge" x1="1073" y1="220" x2="1073" y2="328" marker-end="url(#m)"/>
+        <text class="lbl" x="1081" y="262">8 excerpts</text>
+        <text class="lbl" x="1081" y="277">in Lithuanian</text>
+
+        <!-- 7 answer -->
+        <rect class="box" x="998" y="330" width="150" height="100" rx="10" style="stroke: var(--t-main); stroke-width: 1.8"/>
+        <text class="num" x="1010" y="350">7</text><text class="ttl" x="1024" y="350">Answer</text>
+        <text class="sub" x="1010" y="370">in the user's language</text>
+        <text class="sub" x="1010" y="385">cites [Art. 5(1)(f)]</text>
+        <rect class="chipr-main" x="1010" y="400" width="70" height="18" rx="9"/><text class="chipt chipt-main" x="1045" y="413" text-anchor="middle">main LLM</text>
+        <text class="ann" x="1010" y="448">to build</text>
+
+        <!-- style toggle -->
+        <rect class="box planned" x="998" y="470" width="150" height="56" rx="8"/>
+        <text class="ttl" x="1010" y="492">Style toggle (UI)</text><text class="sub" x="1010" y="510">plain | legal detail</text>
+        <line class="edge" x1="1120" y1="470" x2="1120" y2="432" marker-end="url(#m)"/>
+        <text class="lbl" x="1126" y="460">style</text>
+
+        <!-- 8 post-check -->
+        <line class="edge" x1="998" y1="380" x2="978" y2="380" marker-end="url(#m)"/>
+        <rect class="box" x="826" y="330" width="150" height="100" rx="10"/>
+        <text class="num" x="838" y="350">8</text><text class="ttl" x="852" y="350">Post-check</text>
+        <text class="sub" x="838" y="370">citations · language</text>
+        <text class="sub" x="838" y="385">quotes are verbatim</text>
+        <rect class="chipr-none" x="838" y="400" width="84" height="18" rx="9"/><text class="chipt chipt-none" x="880" y="413" text-anchor="middle">no API call</text>
+        <text class="ann" x="838" y="448">extend</text>
+
+        <!-- 9 show -->
+        <line class="edge" x1="826" y1="380" x2="806" y2="380" marker-end="url(#m)"/>
+        <rect class="box" x="654" y="330" width="150" height="100" rx="10"/>
+        <text class="num" x="666" y="350">9</text><text class="ttl" x="680" y="350">Show</text>
+        <text class="sub" x="666" y="370">labels in Lithuanian</text>
+        <text class="sub" x="666" y="385">EUR-Lex link per language</text>
+        <rect class="chipr-none" x="666" y="400" width="84" height="18" rx="9"/><text class="chipt chipt-none" x="708" y="413" text-anchor="middle">no API call</text>
+        <text class="ann" x="666" y="448">to build</text>
+
+        <!-- back to user -->
+        <path class="edge stream" d="M654 380 H66 V222" marker-end="url(#ms)"/>
+        <text class="lbl main" x="360" y="370" text-anchor="middle">answer streams back in Lithuanian</text>
+      </svg>
+    </div>
+    <figcaption>Only steps 2 and 6 are new parts of the path; the guard gets two more fields in the call it already makes (language, English rewrite), so there is no extra model call. For non-English questions the floor moves after the guard, because untranslated questions scored below 0.64 in 2 of 200 in-scope cases (E8). Citations keep one standard form in the answer text, so checking and linking do not change; the UI translates the labels. "Tested · E8" marks steps measured on translated dev questions; the rest is design.</figcaption>
+  </figure>
+
+  <figure>
+    <div class="scroll">
+      <svg viewBox="0 0 1180 230" role="img" aria-label="Offline build per language: the EUR-Lex HTML of each language version goes through the same parser and chunker, alignment checks confirm the same 893 IDs and the same numbers as English, then only English is embedded into the vector index, all languages go into the aligned text store, and the Article 3 definitions form the official term glossary.">
+        <defs>
+          <marker id="o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+        </defs>
+        <rect class="box" x="16" y="72" width="180" height="84" rx="10"/>
+        <text class="ttl" x="30" y="98">EUR-Lex HTML × 5</text>
+        <text class="sub" x="30" y="117">en · lt · pl · fi · fr</text>
+        <text class="sub" x="30" y="133">saved from a browser</text>
+        <line class="edge" x1="196" y1="114" x2="226" y2="114" marker-end="url(#o)"/>
+
+        <rect class="box" x="228" y="72" width="180" height="84" rx="10"/>
+        <text class="ttl" x="242" y="98">Same parser, chunker</text>
+        <text class="sub" x="242" y="117">anchors are shared,</text>
+        <text class="sub" x="242" y="133">so IDs are shared</text>
+        <line class="edge" x1="408" y1="114" x2="438" y2="114" marker-end="url(#o)"/>
+
+        <rect class="box" x="440" y="72" width="210" height="84" rx="10"/>
+        <text class="ttl" x="454" y="98">Alignment checks</text>
+        <text class="sub" x="454" y="117">same 893 IDs as English</text>
+        <text class="sub" x="454" y="133">same numbers per chunk</text>
+        <text class="sub" x="454" y="149">(35 000 000, 7 %, dates)</text>
+
+        <path class="edge" d="M650 100 H690 V42 H726" marker-end="url(#o)"/>
+        <path class="edge" d="M650 114 H726" marker-end="url(#o)"/>
+        <path class="edge" d="M650 128 H690 V186 H726" marker-end="url(#o)"/>
+        <text class="lbl" x="684" y="62" text-anchor="end">EN only</text>
+
+        <rect class="box store" x="728" y="16" width="200" height="52" rx="8"/>
+        <text class="ttl" x="740" y="37">English index</text><text class="sub" x="740" y="55">embedded once (exists today)</text>
+        <rect class="box store" x="728" y="88" width="200" height="52" rx="8"/>
+        <text class="ttl" x="740" y="109">Aligned texts</text><text class="sub" x="740" y="127">5 × 893 official texts</text>
+        <rect class="box store" x="728" y="160" width="200" height="52" rx="8"/>
+        <text class="ttl" x="740" y="181">Term glossary</text><text class="sub" x="740" y="199">68 definitions × 5</text>
+
+        <rect class="box planned" x="956" y="72" width="208" height="84" rx="10"/>
+        <text class="ttl" x="970" y="98">Adding language #6</text>
+        <text class="sub" x="970" y="117">save HTML, run the build,</text>
+        <text class="sub" x="970" y="133">translate the test questions;</text>
+        <text class="sub" x="970" y="149">no new index</text>
+      </svg>
+    </div>
+    <figcaption>Every language goes through the same build. If a language version fails an alignment check, it is not loaded. Only English text is embedded; the other languages are text lookups by chunk ID, so the index and every retrieval measurement stay as they are.</figcaption>
+  </figure>
+
+  <div class="two" style="margin-top: 14px">
+    <div>
+      <div class="eyebrow">E8 · dev questions, translated</div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Search approach</th><th>Right provision in top 5</th><th>First</th><th>Wrongly refused</th></tr></thead>
+          <tbody>
+            <tr><td>English baseline</td><td class="n">0.98</td><td class="n">0.94</td><td class="n">0 / 50</td></tr>
+            <tr><td><b>Translate, then search English</b></td><td class="n"><b>0.98–1.00</b></td><td class="n">0.88–0.90</td><td class="n"><b>0 / 200</b></td></tr>
+            <tr><td>Search untranslated</td><td class="n">0.94–0.98</td><td class="n">0.74–0.88</td><td class="n">2 / 200</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:8px">Ranges are across lt, pl, fi, fr. The guard detected the language in 250/250 questions. Provisional: Gemini translated and back-translated, no native-speaker check yet.</p>
+    </div>
+    <div class="panel">
+      <div class="eyebrow">Still to test before it ships</div>
+      <ul>
+        <li>Alignment checks on the real language versions.</li>
+        <li>Answers: in the right language, facts and citations kept, quotes match the official text.</li>
+        <li>Plain-language mode keeps conditions and exceptions.</li>
+        <li>Native-speaker review of a sample per language.</li>
+        <li>Native per-language search, for comparison.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>

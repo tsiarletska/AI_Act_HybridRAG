@@ -1,0 +1,2361 @@
+{
+  "run_at": "2026-11-18T13:51:05+00:00",
+  "cases": "evals/retrieval_cases_test.yaml",
+  "n_cases": 25,
+  "embedder": "gemini2",
+  "budgets_words": [
+    500,
+    1500,
+    3000
+  ],
+  "coverage_threshold": 0.5,
+  "shingle_words": 5,
+  "embed_api_calls": 25,
+  "strategies": {
+    "fixed_250": {
+      "description": "Sliding windows, 250 words, 40 overlap",
+      "n_chunks": 417,
+      "median_words": 250,
+      "max_words": 250,
+      "indexed_words": 104146,
+      "citability": {
+        "paragraph_level": 0.175,
+        "article_level": 0.487
+      },
+      "dense": {
+        "recall@500w": 0.68,
+        "recall@1500w": 0.92,
+        "recall@3000w": 0.92,
+        "precision@500w": 0.236,
+        "precision@1500w": 0.139,
+        "precision@3000w": 0.081,
+        "recall@5chunks": 0.84,
+        "avg_words_in_top5": 1250
+      },
+      "dense_cases": [
+        {
+          "id": "t01",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t18",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ],
+      "hybrid": {
+        "recall@500w": 0.68,
+        "recall@1500w": 0.92,
+        "recall@3000w": 0.96,
+        "precision@500w": 0.22,
+        "precision@1500w": 0.127,
+        "precision@3000w": 0.084,
+        "recall@5chunks": 0.92,
+        "avg_words_in_top5": 1250
+      },
+      "hybrid_cases": [
+        {
+          "id": "t01",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t18",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ]
+    },
+    "fixed_500": {
+      "description": "Sliding windows, 500 words, 75 overlap",
+      "n_chunks": 206,
+      "median_words": 500,
+      "max_words": 500,
+      "indexed_words": 102881,
+      "citability": {
+        "paragraph_level": 0.024,
+        "article_level": 0.238
+      },
+      "dense": {
+        "recall@500w": 0.52,
+        "recall@1500w": 0.72,
+        "recall@3000w": 0.88,
+        "precision@500w": 0.197,
+        "precision@1500w": 0.132,
+        "precision@3000w": 0.081,
+        "recall@5chunks": 0.88,
+        "avg_words_in_top5": 2495
+      },
+      "dense_cases": [
+        {
+          "id": "t01",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t15",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t16",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t18",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t23",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ],
+      "hybrid": {
+        "recall@500w": 0.52,
+        "recall@1500w": 0.84,
+        "recall@3000w": 0.92,
+        "precision@500w": 0.203,
+        "precision@1500w": 0.146,
+        "precision@3000w": 0.081,
+        "recall@5chunks": 0.92,
+        "avg_words_in_top5": 2500
+      },
+      "hybrid_cases": [
+        {
+          "id": "t01",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t16",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t18",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t23",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ]
+    },
+    "recursive_350": {
+      "description": "Recursive split (line > sentence), packed to 350 words",
+      "n_chunks": 287,
+      "median_words": 320,
+      "max_words": 350,
+      "indexed_words": 87506,
+      "citability": {
+        "paragraph_level": 0.223,
+        "article_level": 0.491
+      },
+      "dense": {
+        "recall@500w": 0.6,
+        "recall@1500w": 0.84,
+        "recall@3000w": 0.92,
+        "precision@500w": 0.239,
+        "precision@1500w": 0.126,
+        "precision@3000w": 0.077,
+        "recall@5chunks": 0.84,
+        "avg_words_in_top5": 1501
+      },
+      "dense_cases": [
+        {
+          "id": "t01",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t18",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t19",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ],
+      "hybrid": {
+        "recall@500w": 0.64,
+        "recall@1500w": 0.92,
+        "recall@3000w": 0.92,
+        "precision@500w": 0.233,
+        "precision@1500w": 0.133,
+        "precision@3000w": 0.078,
+        "recall@5chunks": 0.92,
+        "avg_words_in_top5": 1538
+      },
+      "hybrid_cases": [
+        {
+          "id": "t01",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t18",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": false,
+          "1500": true,
+          "3000": true
+        }
+      ]
+    },
+    "article": {
+      "description": "One chunk per article / recital / annex",
+      "n_chunks": 306,
+      "median_words": 190,
+      "max_words": 2619,
+      "indexed_words": 89586,
+      "citability": {
+        "paragraph_level": 0.67,
+        "article_level": 0.997
+      },
+      "dense": {
+        "recall@500w": 0.6,
+        "recall@1500w": 0.8,
+        "recall@3000w": 0.96,
+        "precision@500w": 0.307,
+        "precision@1500w": 0.178,
+        "precision@3000w": 0.093,
+        "recall@5chunks": 0.84,
+        "avg_words_in_top5": 1854
+      },
+      "dense_cases": [
+        {
+          "id": "t01",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t18",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t19",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ],
+      "hybrid": {
+        "recall@500w": 0.8,
+        "recall@1500w": 0.92,
+        "recall@3000w": 0.96,
+        "precision@500w": 0.385,
+        "precision@1500w": 0.184,
+        "precision@3000w": 0.095,
+        "recall@5chunks": 0.92,
+        "avg_words_in_top5": 2571
+      },
+      "hybrid_cases": [
+        {
+          "id": "t01",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t18",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ]
+    },
+    "paragraph": {
+      "description": "One chunk per article paragraph (points not split)",
+      "n_chunks": 745,
+      "median_words": 77,
+      "max_words": 2619,
+      "indexed_words": 99473,
+      "citability": {
+        "paragraph_level": 0.995,
+        "article_level": 0.996
+      },
+      "dense": {
+        "recall@500w": 0.68,
+        "recall@1500w": 0.84,
+        "recall@3000w": 0.96,
+        "precision@500w": 0.321,
+        "precision@1500w": 0.163,
+        "precision@3000w": 0.094,
+        "recall@5chunks": 0.8,
+        "avg_words_in_top5": 896
+      },
+      "dense_cases": [
+        {
+          "id": "t01",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t18",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t19",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ],
+      "hybrid": {
+        "recall@500w": 0.84,
+        "recall@1500w": 0.92,
+        "recall@3000w": 0.96,
+        "precision@500w": 0.427,
+        "precision@1500w": 0.203,
+        "precision@3000w": 0.098,
+        "recall@5chunks": 0.92,
+        "avg_words_in_top5": 769
+      },
+      "hybrid_cases": [
+        {
+          "id": "t01",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t18",
+          "500": false,
+          "1500": false,
+          "3000": true
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ]
+    },
+    "structural": {
+      "description": "Production: paragraph > point, definitions, annex points, + header",
+      "n_chunks": 893,
+      "median_words": 69,
+      "max_words": 729,
+      "indexed_words": 104317,
+      "citability": {
+        "paragraph_level": 0.963,
+        "article_level": 0.973
+      },
+      "dense": {
+        "recall@500w": 0.96,
+        "recall@1500w": 1.0,
+        "recall@3000w": 1.0,
+        "precision@500w": 0.366,
+        "precision@1500w": 0.173,
+        "precision@3000w": 0.103,
+        "recall@5chunks": 0.96,
+        "avg_words_in_top5": 666
+      },
+      "dense_cases": [
+        {
+          "id": "t01",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t18",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ],
+      "hybrid": {
+        "recall@500w": 1.0,
+        "recall@1500w": 1.0,
+        "recall@3000w": 1.0,
+        "precision@500w": 0.468,
+        "precision@1500w": 0.209,
+        "precision@3000w": 0.11,
+        "recall@5chunks": 1.0,
+        "avg_words_in_top5": 464
+      },
+      "hybrid_cases": [
+        {
+          "id": "t01",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t18",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": true,
+          "1500": true,
+          "3000": true
+        }
+      ]
+    },
+    "structural_nohdr": {
+      "description": "Production chunks without header/label",
+      "n_chunks": 893,
+      "median_words": 69,
+      "max_words": 729,
+      "indexed_words": 88281,
+      "citability": {
+        "paragraph_level": 0.963,
+        "article_level": 0.973
+      },
+      "dense": {
+        "recall@500w": 0.92,
+        "recall@1500w": 0.92,
+        "recall@3000w": 0.92,
+        "precision@500w": 0.294,
+        "precision@1500w": 0.126,
+        "precision@3000w": 0.074,
+        "recall@5chunks": 0.92,
+        "avg_words_in_top5": 660
+      },
+      "dense_cases": [
+        {
+          "id": "t01",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t18",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": false,
+          "3000": false
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": false,
+          "1500": false,
+          "3000": false
+        }
+      ],
+      "hybrid": {
+        "recall@500w": 0.92,
+        "recall@1500w": 0.96,
+        "recall@3000w": 0.96,
+        "precision@500w": 0.329,
+        "precision@1500w": 0.15,
+        "precision@3000w": 0.084,
+        "recall@5chunks": 0.92,
+        "avg_words_in_top5": 477
+      },
+      "hybrid_cases": [
+        {
+          "id": "t01",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t02",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t03",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t04",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t05",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t06",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t07",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t08",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t09",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t10",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t11",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t12",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t13",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t14",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t15",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t16",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t17",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t18",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t19",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t20",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t21",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t22",
+          "500": false,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t23",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t24",
+          "500": true,
+          "1500": true,
+          "3000": true
+        },
+        {
+          "id": "t25",
+          "500": false,
+          "1500": false,
+          "3000": false
+        }
+      ]
+    }
+  }
+}

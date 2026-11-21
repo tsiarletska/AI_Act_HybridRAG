@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Act Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" id="hl-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <link rel="stylesheet" id="hl-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" disabled>
+  <script>
+    // theme before first paint: saved choice, otherwise light (the reference design is light)
+    try { const t = localStorage.getItem("aiact.theme"); if (t === "dark") document.documentElement.dataset.theme = "dark"; } catch {}
+  </script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script defer src="/static/app.js"></script>
+</head>
+<body>
+<div class="shell">
+  <!-- ============================== SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="side-brand">AI Act Assistant</div>
+    <div class="side-doc">
+      <span class="avatar" aria-hidden="true">§</span>
+      <div>
+        <div class="side-doc-title">Regulation (EU) 2024/1689</div>
+        <div class="side-doc-sub">Artificial Intelligence Act</div>
+        <div class="side-doc-sub">Original text, OJ 12.7.2024</div>
+      </div>
+    </div>
+
+    <div class="side-label">Navigation</div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" data-tab="chat" aria-selected="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat</button>
+      <button role="tab" data-tab="scheme" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><path d="M10 6.5h4.5a2 2 0 0 1 2 2V14"/></svg>Scheme</button>
+      <button role="tab" data-tab="source" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Source code</button>
+      <button role="tab" data-tab="evaluation" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>Evaluation</button>
+      <button role="tab" data-tab="agentic" aria-selected="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><path d="M8 16h.01M16 16h.01"/></svg>Agentic usage</button>
+    </nav>
+
+    <div class="side-foot">
+      <div class="side-label">Summary</div>
+      <div id="models" class="side-models">Loading…</div>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <!-- ============================== MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn" id="toggle-sidebar" aria-label="Toggle sidebar" title="Toggle sidebar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
+      </button>
+      <span class="topbar-sep"></span>
+      <span class="crumb" id="crumb">Chat</span>
+      <button class="icon-btn push" id="toggle-theme" aria-label="Switch light or dark theme" title="Light / dark">
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </button>
+    </header>
+
+    <main>
+      <!-- ============================== CHAT -->
+      <section id="tab-chat" class="tab active">
+        <div class="page-head">
+          <h1>Chat</h1>
+          <p class="notice" id="banner">Loading…</p>
+        </div>
+        <div class="disclaimer" role="note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+          <p><b>Not legal advice.</b> This is an AI chatbot, for information only. It answers from the text of the EU AI Act alone: it does not know the details of your situation, other EU or national laws, official guidance or later amendments, and it can make mistakes. Check the cited provisions and consult a qualified lawyer before acting on an answer. You remain responsible for the decisions you take.</p>
+        </div>
+        <div class="chat-layout">
+          <div class="card chat-card">
+            <div class="card-head">
+              <div>
+                <h2>Ask about the EU AI Act</h2>
+                <p class="card-desc">Answers use only the text of the regulation and cite the provisions they rely on.</p>
+              </div>
+              <div class="head-actions">
+                <button id="export" class="btn-outline has-tip" type="button" disabled aria-describedby="tip-export">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Export CSV<span class="tip" id="tip-export" role="tooltip">Download this conversation as a CSV file: your questions, the answers and their cited provisions.</span></button>
+                <button id="new" class="btn-outline has-tip" type="button" aria-describedby="tip-new">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>New conversation<span class="tip" id="tip-new" role="tooltip">Starts a new conversation and clears the current one from this page. It cannot be reopened here, so export it first if you want to keep it.</span></button>
+              </div>
+            </div>
+            <div id="messages" class="messages" aria-live="polite">
+              <div class="empty" id="empty">
+                <p class="empty-title">Try one of these</p>
+                <div class="examples">
+                  <button class="ex">Which AI practices are prohibited?</button>
+                  <button class="ex">Can my employer use emotion recognition on staff?</button>
+                  <button class="ex">What is a deployer?</button>
+                  <button class="ex">What are the fines for violating Article 5?</button>
+                  <button class="ex">When do the rules for general-purpose AI models apply?</button>
+                  <button class="ex">Is a CV-screening tool a high-risk AI system?</button>
+                </div>
+              </div>
+            </div>
+            <div class="composer">
+              <form id="ask" class="ask" autocomplete="off">
+                <textarea id="q" rows="1" placeholder="Ask a question about the AI Act…" maxlength="2000" aria-label="Your question"></textarea>
+                <button type="submit" id="send" class="btn-primary" aria-label="Send">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 7-7 7 7M12 19V5"/></svg>
+                </button>
+              </form>
+              <div class="ask-foot">
+                <span class="foot-label">Answer style</span>
+                <div class="seg style-toggle" role="radiogroup" aria-label="Answer style">
+                  <button type="button" role="radio" data-style="legal" aria-checked="true" title="Precise, close to the wording of the Act">Legal detail</button>
+                  <button type="button" role="radio" data-style="plain" aria-checked="false" title="Explained in everyday words for non-lawyers, same citations">Explanatory</button>
+                </div>
+                <span class="hint">Enter to send · Shift+Enter for a new line</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="card sources" id="sources">
+            <div class="card-head">
+              <div>
+                <h2>Sources</h2>
+                <p class="card-desc">Provisions retrieved for the latest answer.</p>
+              </div>
+            </div>
+            <p class="empty-note" id="sources-empty">No sources yet. Cited provisions will be marked.</p>
+            <ol id="sources-list"></ol>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ============================== SCHEME -->
+      <section id="tab-scheme" class="tab">
+        <div class="page-head">
+          <h1>Scheme</h1>
+          <p class="page-desc">The system as a whole: what happens to one question, from the traffic limits to the answer and the conversation memory. Drawn by hand in draw.io.</p>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <div><h2>System diagram</h2><p class="card-desc" id="scheme-meta">Loading…</p></div>
+            <button id="scheme-zoom" class="btn-outline" type="button" aria-pressed="false">Actual size</button>
+          </div>
+          <div id="scheme" class="scheme-view"></div>
+        </div>
+      </section>
+
+      <!-- ============================== SOURCE CODE -->
+      <section id="tab-source" class="tab">
+        <div class="page-head">
+          <h1>Source code</h1>
+          <p class="page-desc">A Python engine (FastAPI) over the original text of the Act. The request path is drawn on the Scheme page.</p>
+        </div>
+        <div class="card">
+          <div class="card-head"><div><h2>Files</h2><p class="card-desc">The code that runs this app, read-only.</p></div></div>
+          <div class="code-layout">
+            <nav id="files" class="files" aria-label="Source files"></nav>
+            <div class="viewer">
+              <div class="viewer-head"><span id="file-path">Select a file</span><span id="file-lines" class="muted"></span></div>
+              <pre><code id="file-code" class="hljs"></code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== EVALUATION -->
+      <section id="tab-evaluation" class="tab">
+        <div id="eval-page"><p class="muted">Loading…</p></div>
+      </section>
+
+      <!-- ============================== AGENTIC USAGE -->
+      <section id="tab-agentic" class="tab">
+        <div class="page-head">
+          <h1>Agentic usage</h1>
+          <p class="page-desc">How this project was built with an AI coding agent: the key prompt, the build steps, who brought what, the key decisions and the limitations.</p>
+        </div>
+        <article id="doc" class="card doc"></article>
+      </section>
+    </main>
+  </div>
+</div>
+</body>
+</html>

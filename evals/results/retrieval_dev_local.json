@@ -1,0 +1,2921 @@
+{
+  "run_at": "2026-11-18T13:11:59+00:00",
+  "commit": "",
+  "embedder": "local",
+  "embed_api_calls": 0,
+  "n_cases": 50,
+  "n_chunks": 893,
+  "seconds": 0.94,
+  "metrics": {
+    "bm25": {
+      "recall@1": 0.36,
+      "recall@3": 0.56,
+      "recall@5": 0.66,
+      "recall@8": 0.78,
+      "mrr": 0.487
+    },
+    "dense": {
+      "recall@1": 0.44,
+      "recall@3": 0.62,
+      "recall@5": 0.66,
+      "recall@8": 0.7,
+      "mrr": 0.536
+    },
+    "hybrid": {
+      "recall@1": 0.6,
+      "recall@3": 0.72,
+      "recall@5": 0.78,
+      "recall@8": 0.82,
+      "mrr": 0.672
+    },
+    "+glossary": {
+      "recall@1": 0.64,
+      "recall@3": 0.72,
+      "recall@5": 0.82,
+      "recall@8": 0.84,
+      "mrr": 0.703
+    },
+    "+titles": {
+      "recall@1": 0.6,
+      "recall@3": 0.72,
+      "recall@5": 0.78,
+      "recall@8": 0.8,
+      "mrr": 0.674
+    },
+    "product": {
+      "recall@1": 0.74,
+      "recall@3": 0.88,
+      "recall@5": 0.94,
+      "recall@8": 0.96,
+      "mrr": 0.824
+    }
+  },
+  "configs": {
+    "bm25": "BM25 only",
+    "dense": "Dense embeddings only",
+    "hybrid": "BM25 + dense, RRF",
+    "+glossary": "hybrid + lay→legal glossary for BM25",
+    "+titles": "hybrid + glossary + article-title ranker (tested, not used: no gain)",
+    "product": "hybrid + glossary + reference resolver (what the app uses)"
+  },
+  "product_by_style": {
+    "natural": {
+      "n": 43,
+      "recall@5": 0.93
+    },
+    "ref": {
+      "n": 7,
+      "recall@5": 1.0
+    }
+  },
+  "failures": [
+    {
+      "id": "r02",
+      "q": "Can employers use emotion recognition on their staff?",
+      "gold": [
+        "art_5_1_f"
+      ],
+      "got_top3": [
+        "art_3_39",
+        "art_50_3",
+        "anx_III_1"
+      ]
+    },
+    {
+      "id": "r36",
+      "q": "When does the AI Act start to apply?",
+      "gold": [
+        "art_113"
+      ],
+      "got_top3": [
+        "art_112_1",
+        "rct_179",
+        "art_2_8"
+      ]
+    },
+    {
+      "id": "r38",
+      "q": "What must providers of high-risk AI systems do?",
+      "gold": [
+        "art_16"
+      ],
+      "got_top3": [
+        "art_25_1",
+        "art_20_1",
+        "art_21_1"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "r01",
+      "style": "natural",
+      "q": "Is social scoring by AI allowed?",
+      "gold": [
+        "art_5_1_c"
+      ],
+      "bm25": {
+        "first_hit_rank": 2,
+        "top3": [
+          "rct_31",
+          "art_5_1_c",
+          "art_7_2_h"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 2,
+        "top3": [
+          "rct_31",
+          "art_5_1_c",
+          "rct_44"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_1_c",
+          "rct_31",
+          "rct_28"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_1_c",
+          "rct_31",
+          "rct_28"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_1_c",
+          "rct_31",
+          "rct_28"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_1_c",
+          "rct_31",
+          "rct_28"
+        ]
+      }
+    },
+    {
+      "id": "r02",
+      "style": "natural",
+      "q": "Can employers use emotion recognition on their staff?",
+      "gold": [
+        "art_5_1_f"
+      ],
+      "bm25": {
+        "first_hit_rank": 8,
+        "top3": [
+          "art_3_39",
+          "art_50_3",
+          "rct_18"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_44",
+          "rct_18",
+          "art_50_3"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_3_39",
+          "art_50_3",
+          "anx_III_1"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_3_39",
+          "art_50_3",
+          "anx_III_1"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_3_39",
+          "art_50_3",
+          "anx_III_1"
+        ]
+      },
+      "product": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_3_39",
+          "art_50_3",
+          "anx_III_1"
+        ]
+      }
+    },
+    {
+      "id": "r03",
+      "style": "natural",
+      "q": "Is it allowed to build a face recognition database by scraping images from the internet?",
+      "gold": [
+        "art_5_1_e"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_1_e",
+          "rct_43",
+          "rct_15"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_133",
+          "rct_105",
+          "rct_30"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_1_e",
+          "rct_43",
+          "rct_30"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_1_e",
+          "art_50_3",
+          "rct_43"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_1_e",
+          "art_71_5",
+          "art_71_4"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_1_e",
+          "art_50_3",
+          "rct_43"
+        ]
+      }
+    },
+    {
+      "id": "r04",
+      "style": "natural",
+      "q": "When can police use real-time remote biometric identification in public spaces?",
+      "gold": [
+        "art_5_1_h",
+        "art_5_2",
+        "art_5_3"
+      ],
+      "bm25": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_3_43",
+          "art_5_2",
+          "rct_39"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_2",
+          "rct_34",
+          "rct_38"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_2",
+          "art_3_42",
+          "art_5_4"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_2",
+          "art_5_4",
+          "art_5_7"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_2",
+          "art_5_4",
+          "art_5_7"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_2",
+          "art_5_4",
+          "art_5_7"
+        ]
+      }
+    },
+    {
+      "id": "r05",
+      "style": "natural",
+      "q": "What is the maximum fine for using a prohibited AI practice?",
+      "gold": [
+        "art_99_3"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_5_1_h",
+          "art_5_8",
+          "art_5_1_e"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_3",
+          "art_5_1_d",
+          "art_5_1_a"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 8,
+        "top3": [
+          "art_5_1_h",
+          "art_5_1_e",
+          "art_5_1_f"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_3",
+          "art_100_2",
+          "art_100_3"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_3",
+          "art_100_2",
+          "art_5_1_h"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_3",
+          "art_100_2",
+          "art_100_3"
+        ]
+      }
+    },
+    {
+      "id": "r06",
+      "style": "natural",
+      "q": "How much can a company be fined for supplying misleading information to authorities?",
+      "gold": [
+        "art_99_5"
+      ],
+      "bm25": {
+        "first_hit_rank": 4,
+        "top3": [
+          "art_91_4",
+          "art_91_5",
+          "art_100_6"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_5",
+          "art_99_4",
+          "art_99_3"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_5",
+          "art_101_1",
+          "art_91_4"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_5",
+          "art_99_3",
+          "art_100_5"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_5",
+          "art_99_3",
+          "art_100_5"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_5",
+          "art_99_3",
+          "art_100_5"
+        ]
+      }
+    },
+    {
+      "id": "r07",
+      "style": "natural",
+      "q": "Are fines lower for SMEs and start-ups?",
+      "gold": [
+        "art_99_6"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_6",
+          "art_62_1",
+          "rct_143"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_6",
+          "art_99_1",
+          "art_62_2"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_6",
+          "art_62_2",
+          "art_62_1"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_6",
+          "art_100_2",
+          "art_112_4"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_6",
+          "art_100_2",
+          "art_100_3"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_6",
+          "art_100_2",
+          "art_112_4"
+        ]
+      }
+    },
+    {
+      "id": "r08",
+      "style": "natural",
+      "q": "What fines apply to providers of general-purpose AI models?",
+      "gold": [
+        "art_101_1"
+      ],
+      "bm25": {
+        "first_hit_rank": 7,
+        "top3": [
+          "art_101_3",
+          "art_101_4",
+          "rct_97"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_101_1",
+          "art_101_3",
+          "art_101_4"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 3,
+        "top3": [
+          "art_101_3",
+          "art_101_4",
+          "art_101_1"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 4,
+        "top3": [
+          "art_101_3",
+          "art_101_4",
+          "art_101_5"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 4,
+        "top3": [
+          "art_101_3",
+          "art_101_4",
+          "art_101_5"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 4,
+        "top3": [
+          "art_101_3",
+          "art_101_4",
+          "art_101_5"
+        ]
+      }
+    },
+    {
+      "id": "r09",
+      "style": "natural",
+      "q": "Do companies have to train their staff on AI?",
+      "gold": [
+        "art_4"
+      ],
+      "bm25": {
+        "first_hit_rank": 3,
+        "top3": [
+          "art_31_7",
+          "art_3_55",
+          "art_4"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_4",
+          "rct_91",
+          "rct_165"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_4",
+          "art_26_2",
+          "rct_155"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_4",
+          "art_26_7",
+          "art_100_5"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_4",
+          "art_26_7",
+          "art_100_5"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_4",
+          "art_26_7",
+          "art_100_5"
+        ]
+      }
+    },
+    {
+      "id": "r10",
+      "style": "natural",
+      "q": "Who must carry out a fundamental rights impact assessment?",
+      "gold": [
+        "art_27_1"
+      ],
+      "bm25": {
+        "first_hit_rank": 8,
+        "top3": [
+          "rct_96",
+          "art_27_4",
+          "art_27_2"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 8,
+        "top3": [
+          "rct_96",
+          "art_27_5",
+          "art_77_1"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 5,
+        "top3": [
+          "art_27_4",
+          "art_27_5",
+          "art_27_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 5,
+        "top3": [
+          "art_27_4",
+          "art_27_5",
+          "art_27_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 5,
+        "top3": [
+          "art_27_4",
+          "art_27_5",
+          "art_27_2"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 5,
+        "top3": [
+          "art_27_4",
+          "art_27_5",
+          "art_27_2"
+        ]
+      }
+    },
+    {
+      "id": "r11",
+      "style": "natural",
+      "q": "Do I have to tell people that an image is a deepfake?",
+      "gold": [
+        "art_50_4"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_6",
+          "art_3_34",
+          "rct_99"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 3,
+        "top3": [
+          "art_3_60",
+          "rct_134",
+          "art_50_4"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_3_60",
+          "art_50_4",
+          "art_50_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_3_60",
+          "art_50_4",
+          "art_50_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_3_60",
+          "art_50_4",
+          "art_50_2"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_3_60",
+          "art_50_4",
+          "art_50_2"
+        ]
+      }
+    },
+    {
+      "id": "r12",
+      "style": "natural",
+      "q": "Must users be informed that they are talking to a chatbot?",
+      "gold": [
+        "art_50_1"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_61_2",
+          "art_3_59",
+          "rct_119"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 2,
+        "top3": [
+          "rct_132",
+          "art_50_1",
+          "art_91_2"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_1",
+          "art_60_5",
+          "rct_119"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_1",
+          "art_60_5",
+          "rct_132"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_1",
+          "art_60_5",
+          "rct_132"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_1",
+          "art_60_5",
+          "rct_132"
+        ]
+      }
+    },
+    {
+      "id": "r13",
+      "style": "natural",
+      "q": "Does AI-generated content need to be watermarked or marked as synthetic?",
+      "gold": [
+        "art_50_2"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_2",
+          "rct_133",
+          "art_50_4"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 4,
+        "top3": [
+          "rct_133",
+          "art_50_4",
+          "rct_134"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_2",
+          "art_50_4",
+          "art_50_7"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_2",
+          "art_50_4",
+          "art_48_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_2",
+          "art_50_4",
+          "art_19_1"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_2",
+          "art_50_4",
+          "art_48_2"
+        ]
+      }
+    },
+    {
+      "id": "r14",
+      "style": "natural",
+      "q": "What documentation must providers of general-purpose AI models prepare?",
+      "gold": [
+        "art_53_1"
+      ],
+      "bm25": {
+        "first_hit_rank": 7,
+        "top3": [
+          "anx_XI_1_intro",
+          "art_53_7",
+          "anx_XI_1_1"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 3,
+        "top3": [
+          "anx_XI_1_1",
+          "art_91_1",
+          "art_53_1"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 3,
+        "top3": [
+          "anx_XI_1_1",
+          "art_91_1",
+          "art_53_1"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 3,
+        "top3": [
+          "anx_XI_1_1",
+          "art_91_1",
+          "art_53_1"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 2,
+        "top3": [
+          "anx_XI_1_1",
+          "art_53_1",
+          "art_54_3"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 3,
+        "top3": [
+          "anx_XI_1_1",
+          "art_91_1",
+          "art_53_1"
+        ]
+      }
+    },
+    {
+      "id": "r15",
+      "style": "natural",
+      "q": "When is a general-purpose AI model presumed to have systemic risk based on training compute?",
+      "gold": [
+        "art_51_2"
+      ],
+      "bm25": {
+        "first_hit_rank": 2,
+        "top3": [
+          "rct_112",
+          "art_51_2",
+          "rct_111"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 6,
+        "top3": [
+          "rct_111",
+          "rct_112",
+          "rct_115"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_51_2",
+          "art_51_1",
+          "art_55_1"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_51_2",
+          "art_51_1",
+          "art_55_1"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_51_2",
+          "art_51_1",
+          "art_55_1"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_51_2",
+          "art_51_1",
+          "art_55_1"
+        ]
+      }
+    },
+    {
+      "id": "r16",
+      "style": "natural",
+      "q": "Do GPAI providers need a policy to comply with copyright law?",
+      "gold": [
+        "art_53_1"
+      ],
+      "bm25": {
+        "first_hit_rank": 4,
+        "top3": [
+          "rct_108",
+          "rct_106",
+          "rct_104"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_106",
+          "rct_109",
+          "rct_108"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_53_1",
+          "rct_106",
+          "rct_108"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_53_1",
+          "rct_106",
+          "art_91_5"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_53_1",
+          "art_53_4",
+          "art_53_3"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_53_1",
+          "rct_106",
+          "art_91_5"
+        ]
+      }
+    },
+    {
+      "id": "r17",
+      "style": "natural",
+      "q": "Do model providers have to publish a summary of the training data?",
+      "gold": [
+        "art_53_1"
+      ],
+      "bm25": {
+        "first_hit_rank": 4,
+        "top3": [
+          "rct_107",
+          "rct_108",
+          "rct_104"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_101",
+          "rct_107",
+          "art_91_5"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 2,
+        "top3": [
+          "anx_XI_1_2",
+          "art_53_1",
+          "anx_XII"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 2,
+        "top3": [
+          "anx_XI_1_2",
+          "art_53_1",
+          "anx_XII"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_53_1",
+          "anx_XI_1_2",
+          "anx_XII"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 2,
+        "top3": [
+          "anx_XI_1_2",
+          "art_53_1",
+          "anx_XII"
+        ]
+      }
+    },
+    {
+      "id": "r18",
+      "style": "natural",
+      "q": "What is the European Artificial Intelligence Board and who sits on it?",
+      "gold": [
+        "art_65"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_65_1",
+          "art_65_7",
+          "art_65_8"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_65_8",
+          "art_65_2",
+          "art_65_1"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_65_1",
+          "art_65_8",
+          "art_65_7"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_65_1",
+          "art_65_8",
+          "art_65_7"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_65_1",
+          "art_65_8",
+          "art_65_7"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_65_1",
+          "art_65_8",
+          "art_65_7"
+        ]
+      }
+    },
+    {
+      "id": "r19",
+      "style": "natural",
+      "q": "What are AI regulatory sandboxes and who must set them up?",
+      "gold": [
+        "art_57_1",
+        "art_3_55"
+      ],
+      "bm25": {
+        "first_hit_rank": 4,
+        "top3": [
+          "art_57_15",
+          "art_58_2_b",
+          "art_58_2_c"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_57_5",
+          "art_3_55",
+          "art_57_15"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_57_15",
+          "art_3_55",
+          "art_57_5"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_57_15",
+          "art_3_55",
+          "art_57_5"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 7,
+        "top3": [
+          "art_57_15",
+          "art_57_17",
+          "art_57_5"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_57_15",
+          "art_3_55",
+          "art_57_5"
+        ]
+      }
+    },
+    {
+      "id": "r20",
+      "style": "natural",
+      "q": "How quickly must a serious incident be reported?",
+      "gold": [
+        "art_73_2",
+        "art_73_3",
+        "art_73_4"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_73_2",
+          "art_73_1",
+          "art_73_4"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_73_4",
+          "art_73_3",
+          "art_73_2"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_73_2",
+          "art_73_4",
+          "art_73_3"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_73_2",
+          "art_73_4",
+          "art_73_3"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_73_2",
+          "art_73_6",
+          "art_73_4"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_73_2",
+          "art_73_4",
+          "art_73_3"
+        ]
+      }
+    },
+    {
+      "id": "r21",
+      "style": "natural",
+      "q": "What is post-market monitoring for high-risk AI?",
+      "gold": [
+        "art_72",
+        "art_3_25"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_72_1",
+          "art_72_3",
+          "art_72_2"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 2,
+        "top3": [
+          "rct_155",
+          "art_72_2",
+          "art_3_25"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_72_1",
+          "art_72_2",
+          "art_72_3"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_72_1",
+          "art_72_2",
+          "art_72_3"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_72_2",
+          "art_72_1",
+          "art_72_3"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_3_2",
+          "art_72_1",
+          "art_72_2"
+        ]
+      }
+    },
+    {
+      "id": "r22",
+      "style": "natural",
+      "q": "What human oversight measures are required for high-risk AI systems?",
+      "gold": [
+        "art_14"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_14_3",
+          "art_14_2",
+          "art_13_3_d"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_14_2",
+          "art_14_3",
+          "art_14_4"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_14_3",
+          "art_14_2",
+          "art_13_3_d"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_14_3",
+          "art_14_2",
+          "art_13_3_d"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_14_2",
+          "art_14_3",
+          "art_14_1"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_14_3",
+          "art_14_2",
+          "art_13_3_d"
+        ]
+      }
+    },
+    {
+      "id": "r23",
+      "style": "natural",
+      "q": "What requirements apply to the training, validation and testing data sets?",
+      "gold": [
+        "art_10"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_10_1",
+          "art_10_3",
+          "rct_67"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_10_3",
+          "art_3_31",
+          "art_3_30"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_10_3",
+          "art_10_1",
+          "art_10_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_10_3",
+          "art_10_1",
+          "art_10_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_10_3",
+          "art_10_1",
+          "art_10_2"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_10_3",
+          "art_10_1",
+          "art_10_2"
+        ]
+      }
+    },
+    {
+      "id": "r24",
+      "style": "natural",
+      "q": "Must high-risk AI systems keep logs automatically?",
+      "gold": [
+        "art_12_1",
+        "art_19_1",
+        "art_26_6"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_19_1",
+          "art_26_6",
+          "art_19_2"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_12_1",
+          "art_19_1",
+          "art_26_6"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_19_1",
+          "art_26_6",
+          "art_19_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_19_1",
+          "art_26_6",
+          "art_19_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_19_1",
+          "art_19_2",
+          "art_26_6"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_19_1",
+          "art_26_6",
+          "art_19_2"
+        ]
+      }
+    },
+    {
+      "id": "r25",
+      "style": "natural",
+      "q": "What should a quality management system for AI providers include?",
+      "gold": [
+        "art_17_1"
+      ],
+      "bm25": {
+        "first_hit_rank": 3,
+        "top3": [
+          "art_17_3",
+          "anx_VII_3",
+          "art_17_1_g"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_17_1_l",
+          "art_17_1_f",
+          "art_17_1_e"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_17_1_l",
+          "art_17_1_m",
+          "art_17_1_c"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_17_1_l",
+          "art_17_1_m",
+          "art_17_1_c"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_17_1_l",
+          "art_17_1_c",
+          "art_17_1_a"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_17_1_l",
+          "art_17_1_m",
+          "art_17_1_c"
+        ]
+      }
+    },
+    {
+      "id": "r26",
+      "style": "natural",
+      "q": "What obligations do importers of high-risk AI systems have?",
+      "gold": [
+        "art_23"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_23_7",
+          "art_23_2",
+          "art_23_4"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_23_4",
+          "art_23_7",
+          "art_23_6"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_23_7",
+          "art_23_4",
+          "art_23_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_23_7",
+          "art_23_4",
+          "art_23_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_23_7",
+          "art_23_4",
+          "art_23_2"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_23_7",
+          "art_23_4",
+          "art_23_2"
+        ]
+      }
+    },
+    {
+      "id": "r27",
+      "style": "natural",
+      "q": "Does the regulation apply to AI used for military purposes?",
+      "gold": [
+        "art_2_3"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_2_3",
+          "rct_24",
+          "rct_97"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 3,
+        "top3": [
+          "rct_24",
+          "art_2_10",
+          "art_2_3"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_2_3",
+          "art_2_6",
+          "art_111_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_2_3",
+          "art_2_6",
+          "art_111_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_111_2",
+          "art_2_3",
+          "art_2_6"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_2_3",
+          "art_2_6",
+          "art_111_2"
+        ]
+      }
+    },
+    {
+      "id": "r28",
+      "style": "natural",
+      "q": "Is AI developed only for scientific research covered?",
+      "gold": [
+        "art_2_6"
+      ],
+      "bm25": {
+        "first_hit_rank": 2,
+        "top3": [
+          "rct_25",
+          "art_2_6",
+          "art_2_8"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_2_6",
+          "rct_25",
+          "rct_12"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_2_6",
+          "art_2_8",
+          "art_68_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_2_6",
+          "art_2_8",
+          "art_68_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_68_2",
+          "art_2_6",
+          "art_2_8"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_2_6",
+          "art_2_8",
+          "art_68_2"
+        ]
+      }
+    },
+    {
+      "id": "r29",
+      "style": "natural",
+      "q": "Are open-source AI models exempt from the rules?",
+      "gold": [
+        "art_2_12",
+        "art_53_2"
+      ],
+      "bm25": {
+        "first_hit_rank": 5,
+        "top3": [
+          "rct_103",
+          "rct_102",
+          "rct_104"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 4,
+        "top3": [
+          "rct_104",
+          "rct_105",
+          "rct_89"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_54_6",
+          "art_2_12",
+          "art_53_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_2_12",
+          "art_54_6",
+          "art_53_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_54_6",
+          "art_53_2",
+          "art_2_12"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_2_12",
+          "art_54_6",
+          "art_53_2"
+        ]
+      }
+    },
+    {
+      "id": "r30",
+      "style": "natural",
+      "q": "Can an AI system listed in Annex III escape the high-risk classification if it only performs a narrow procedural task?",
+      "gold": [
+        "art_6_3"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_6_3",
+          "rct_53",
+          "art_6_1"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_6_3",
+          "art_7_2_a",
+          "art_7_2_b"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_6_3",
+          "art_7_3",
+          "art_7_1"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_6_3",
+          "art_7_3",
+          "art_7_1"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_6_3",
+          "art_7_3",
+          "art_6_4"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 2,
+        "top3": [
+          "anx_III_intro",
+          "art_6_3",
+          "art_7_3"
+        ]
+      }
+    },
+    {
+      "id": "r31",
+      "style": "natural",
+      "q": "Is AI used to screen job applications considered high-risk?",
+      "gold": [
+        "anx_III_4"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_4",
+          "anx_VIII_B_7-9",
+          "art_6_2"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_4",
+          "rct_61",
+          "art_6_3"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_4",
+          "art_6_1",
+          "art_6_3"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_4",
+          "art_6_1",
+          "art_6_3"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_4",
+          "art_6_1",
+          "art_6_3"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_4",
+          "art_6_1",
+          "art_6_3"
+        ]
+      }
+    },
+    {
+      "id": "r32",
+      "style": "natural",
+      "q": "Is AI used to evaluate creditworthiness high-risk?",
+      "gold": [
+        "anx_III_5"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_5",
+          "anx_III_4",
+          "rct_58"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_61",
+          "rct_111",
+          "art_80_1"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_5",
+          "art_7_2_b",
+          "art_82_4"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_5",
+          "art_7_2_b",
+          "art_82_4"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_5",
+          "art_7_2_b",
+          "art_82_4"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_5",
+          "art_7_2_b",
+          "art_82_4"
+        ]
+      }
+    },
+    {
+      "id": "r33",
+      "style": "natural",
+      "q": "Is an AI system that decides university admissions high-risk?",
+      "gold": [
+        "anx_III_3"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_3",
+          "art_28_2",
+          "art_14_4"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_61",
+          "rct_56",
+          "rct_53"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_3",
+          "art_9_9",
+          "rct_56"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_3",
+          "art_15_5",
+          "rct_56"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_3",
+          "art_15_5",
+          "rct_56"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_3",
+          "art_15_5",
+          "rct_56"
+        ]
+      }
+    },
+    {
+      "id": "r34",
+      "style": "natural",
+      "q": "Do people have a right to an explanation of decisions made with high-risk AI?",
+      "gold": [
+        "art_86_1"
+      ],
+      "bm25": {
+        "first_hit_rank": 2,
+        "top3": [
+          "rct_171",
+          "art_86_1",
+          "art_86_3"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_86_2",
+          "art_86_1",
+          "rct_171"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_86_1",
+          "art_86_2",
+          "art_6_3"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_86_1",
+          "art_86_2",
+          "art_6_3"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_86_1",
+          "art_86_2",
+          "art_6_3"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_86_1",
+          "art_86_2",
+          "art_6_3"
+        ]
+      }
+    },
+    {
+      "id": "r35",
+      "style": "natural",
+      "q": "Where can I file a complaint about an AI system that infringes the regulation?",
+      "gold": [
+        "art_85"
+      ],
+      "bm25": {
+        "first_hit_rank": 3,
+        "top3": [
+          "art_5_8",
+          "art_36_6",
+          "art_85"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_89_2",
+          "rct_164",
+          "rct_170"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 6,
+        "top3": [
+          "art_89_2",
+          "rct_170",
+          "rct_162"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 4,
+        "top3": [
+          "art_89_2",
+          "rct_170",
+          "rct_162"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 4,
+        "top3": [
+          "art_89_2",
+          "rct_170",
+          "rct_162"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 4,
+        "top3": [
+          "art_89_2",
+          "rct_170",
+          "rct_162"
+        ]
+      }
+    },
+    {
+      "id": "r36",
+      "style": "natural",
+      "q": "When does the AI Act start to apply?",
+      "gold": [
+        "art_113"
+      ],
+      "bm25": {
+        "first_hit_rank": 7,
+        "top3": [
+          "art_62_1",
+          "art_62_2",
+          "rct_178"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_111_1",
+          "rct_179",
+          "art_58_2_a"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_62_3",
+          "rct_179",
+          "art_58_2_g"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 6,
+        "top3": [
+          "art_112_1",
+          "rct_179",
+          "art_2_8"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 3,
+        "top3": [
+          "art_112_1",
+          "rct_179",
+          "art_113"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 6,
+        "top3": [
+          "art_112_1",
+          "rct_179",
+          "art_2_8"
+        ]
+      }
+    },
+    {
+      "id": "r37",
+      "style": "natural",
+      "q": "What obligations do deployers of high-risk AI systems have?",
+      "gold": [
+        "art_26"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_26_2",
+          "art_20_1",
+          "art_26_5"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_26_1",
+          "rct_91",
+          "rct_93"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_26_2",
+          "art_26_1",
+          "art_26_5"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_26_2",
+          "art_26_1",
+          "art_26_5"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_26_2",
+          "art_26_1",
+          "art_26_5"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_26_2",
+          "art_26_1",
+          "art_26_5"
+        ]
+      }
+    },
+    {
+      "id": "r38",
+      "style": "natural",
+      "q": "What must providers of high-risk AI systems do?",
+      "gold": [
+        "art_16"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_85",
+          "art_24_2",
+          "art_22_1"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_21_1",
+          "art_15_5",
+          "art_15_4"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_25_1",
+          "art_20_1",
+          "art_21_1"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_25_1",
+          "art_20_1",
+          "art_21_1"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_22_2",
+          "art_26_1",
+          "art_25_1"
+        ]
+      },
+      "product": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_25_1",
+          "art_20_1",
+          "art_21_1"
+        ]
+      }
+    },
+    {
+      "id": "r39",
+      "style": "natural",
+      "q": "What does the technical documentation of a high-risk AI system have to contain?",
+      "gold": [
+        "anx_IV",
+        "art_11_1"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_IV_intro",
+          "art_11_1",
+          "anx_VII_4_p4"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_11_1",
+          "rct_71",
+          "art_13_3_e"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_11_1",
+          "art_11_2",
+          "art_13_3_c"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_11_1",
+          "art_11_2",
+          "art_13_3_c"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_11_1",
+          "art_11_2",
+          "art_11_3"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_3_1",
+          "art_11_1",
+          "art_11_2"
+        ]
+      }
+    },
+    {
+      "id": "r40",
+      "style": "natural",
+      "q": "How must the CE marking be affixed?",
+      "gold": [
+        "art_48"
+      ],
+      "bm25": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_48_3",
+          "rct_129",
+          "art_48_4"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_48_3",
+          "art_3_24",
+          "art_48_4"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_48_3",
+          "art_48_4",
+          "art_3_24"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_48_3",
+          "art_48_4",
+          "art_3_24"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_48_3",
+          "art_48_4",
+          "art_48_1"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_48_3",
+          "art_48_4",
+          "art_3_24"
+        ]
+      }
+    },
+    {
+      "id": "r41",
+      "style": "natural",
+      "q": "What is a deployer?",
+      "gold": [
+        "art_3_4"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_26_4",
+          "art_26_3",
+          "art_26_2"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_3_4",
+          "rct_13",
+          "rct_91"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_26_4",
+          "art_26_3",
+          "art_26_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_26_4",
+          "art_26_3",
+          "art_26_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_26_4",
+          "art_26_3",
+          "art_26_5"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_3_4",
+          "art_26_4",
+          "art_26_3"
+        ]
+      }
+    },
+    {
+      "id": "r42",
+      "style": "natural",
+      "q": "How does the regulation define an AI system?",
+      "gold": [
+        "art_3_1"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_100",
+          "art_9_1",
+          "art_17_1_g"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 2,
+        "top3": [
+          "rct_12",
+          "art_3_1",
+          "art_1_1"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 4,
+        "top3": [
+          "rct_12",
+          "rct_85",
+          "art_9_1"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 4,
+        "top3": [
+          "rct_12",
+          "rct_85",
+          "art_9_1"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_12",
+          "art_9_1",
+          "art_17_1_k"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_3_1",
+          "rct_12",
+          "rct_85"
+        ]
+      }
+    },
+    {
+      "id": "r43",
+      "style": "natural",
+      "q": "What counts as a serious incident?",
+      "gold": [
+        "art_3_49"
+      ],
+      "bm25": {
+        "first_hit_rank": 8,
+        "top3": [
+          "art_73_2",
+          "art_73_1",
+          "art_73_4"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_3_49",
+          "art_73_6",
+          "art_73_3"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 5,
+        "top3": [
+          "art_73_6",
+          "art_73_4",
+          "art_73_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 5,
+        "top3": [
+          "art_73_6",
+          "art_73_4",
+          "art_73_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_73_6",
+          "art_73_2",
+          "art_73_4"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_3_49",
+          "art_73_6",
+          "art_73_4"
+        ]
+      }
+    },
+    {
+      "id": "r44",
+      "style": "ref",
+      "q": "What does Article 6(2) say?",
+      "gold": [
+        "art_6_2"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_97_3",
+          "art_99_4",
+          "art_97_6"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_106",
+          "anx_III_intro",
+          "art_63_2"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_97_3",
+          "art_97_6",
+          "art_2_2"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_97_3",
+          "art_97_6",
+          "art_2_2"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": null,
+        "top3": [
+          "anx_III_intro",
+          "art_97_3",
+          "art_97_6"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_6_2",
+          "art_97_3",
+          "art_97_6"
+        ]
+      }
+    },
+    {
+      "id": "r45",
+      "style": "ref",
+      "q": "Summarise Article 5(1)(a).",
+      "gold": [
+        "art_5_1_a"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_97_3",
+          "art_99_4",
+          "art_97_6"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_43_5",
+          "art_46_5",
+          "anx_IV_intro"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": null,
+        "top3": [
+          "anx_VIII_C_1-5",
+          "anx_IV_8-9",
+          "art_112_11"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": null,
+        "top3": [
+          "anx_VIII_C_1-5",
+          "anx_IV_8-9",
+          "art_112_11"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": null,
+        "top3": [
+          "anx_VIII_C_1-5",
+          "anx_IV_8-9",
+          "art_112_11"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_5_1_a",
+          "anx_VIII_C_1-5",
+          "anx_IV_8-9"
+        ]
+      }
+    },
+    {
+      "id": "r46",
+      "style": "ref",
+      "q": "What is listed in Annex III point 8?",
+      "gold": [
+        "anx_III_8"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_49_4",
+          "art_49_3",
+          "art_49_1"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "anx_X_2",
+          "anx_III_intro",
+          "anx_VIII_A_12-13"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_49_4",
+          "anx_III_intro",
+          "anx_VIII_A_12-13"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_49_4",
+          "anx_III_intro",
+          "anx_VIII_A_12-13"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_7_1",
+          "art_7_3",
+          "anx_II"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_III_8",
+          "art_49_4",
+          "anx_III_intro"
+        ]
+      }
+    },
+    {
+      "id": "r47",
+      "style": "ref",
+      "q": "Explain recital 27.",
+      "gold": [
+        "rct_27"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_3_27",
+          "art_27_4",
+          "art_27_5"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_123",
+          "rct_177",
+          "rct_127"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_123",
+          "rct_175",
+          "rct_152"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_123",
+          "rct_175",
+          "rct_152"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_123",
+          "rct_175",
+          "rct_152"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "rct_27",
+          "rct_123",
+          "rct_175"
+        ]
+      }
+    },
+    {
+      "id": "r48",
+      "style": "ref",
+      "q": "What does Art. 99 para 4 cover?",
+      "gold": [
+        "art_99_4"
+      ],
+      "bm25": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_99_8",
+          "art_99_6",
+          "art_99_10"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_105",
+          "rct_104",
+          "art_101_4"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_99_7",
+          "rct_103",
+          "rct_133"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_99_7",
+          "rct_103",
+          "rct_133"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": null,
+        "top3": [
+          "art_99_7",
+          "rct_103",
+          "rct_133"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_99_4",
+          "art_99_7",
+          "rct_103"
+        ]
+      }
+    },
+    {
+      "id": "r49",
+      "style": "ref",
+      "q": "What criteria are in Annex XIII?",
+      "gold": [
+        "anx_XIII"
+      ],
+      "bm25": {
+        "first_hit_rank": 3,
+        "top3": [
+          "art_52_4",
+          "art_112_11",
+          "anx_XIII"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_XIII",
+          "anx_VII_3",
+          "art_112_11"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_XIII",
+          "art_112_11",
+          "art_52_4"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_XIII",
+          "art_112_11",
+          "art_52_4"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_XIII",
+          "art_7_2_a",
+          "art_7_2_k"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "anx_XIII",
+          "art_112_11",
+          "art_52_4"
+        ]
+      }
+    },
+    {
+      "id": "r50",
+      "style": "ref",
+      "q": "What does Article 50 require?",
+      "gold": [
+        "art_50"
+      ],
+      "bm25": {
+        "first_hit_rank": 2,
+        "top3": [
+          "art_3_50",
+          "art_50_5",
+          "art_50_6"
+        ]
+      },
+      "dense": {
+        "first_hit_rank": null,
+        "top3": [
+          "rct_143",
+          "rct_175",
+          "art_63_2"
+        ]
+      },
+      "hybrid": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_6",
+          "art_50_5",
+          "art_50_7"
+        ]
+      },
+      "+glossary": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_6",
+          "art_50_5",
+          "art_50_7"
+        ]
+      },
+      "+titles": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_6",
+          "art_50_5",
+          "art_50_7"
+        ]
+      },
+      "product": {
+        "first_hit_rank": 1,
+        "top3": [
+          "art_50_1",
+          "art_50_2",
+          "art_50_3"
+        ]
+      }
+    }
+  ]
+}

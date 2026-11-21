@@ -1,0 +1,54 @@
+{
+  "embedder": "local",
+  "off_topic": {
+    "Write a Python function to reverse a linked list": 0.571,
+    "What's the weather in Paris tomorrow?": 0.465,
+    "Give me a recipe for lasagna": 0.491,
+    "Who won the football world cup in 2022?": 0.52,
+    "Translate 'good morning' into German": 0.502,
+    "Write a poem about the sea": 0.504,
+    "What is the capital of Australia?": 0.493,
+    "How do I fix a CSS flexbox alignment issue?": 0.481,
+    "Explain quantum entanglement": 0.529,
+    "What are the GDPR rules on data subject access requests?": 0.745,
+    "How do I train a neural network in PyTorch?": 0.594,
+    "Recommend a good laptop for gaming": 0.461,
+    "What is the best stock to buy now?": 0.509,
+    "Tell me a joke": 0.516,
+    "How does the US regulate AI?": 0.786
+  },
+  "in_scope_min": 0.631,
+  "in_scope_median": 0.8,
+  "off_topic_max": 0.786,
+  "sweep": [
+    {
+      "floor": 0.5,
+      "off_topic_blocked": 0.333,
+      "in_scope_blocked": 0.0
+    },
+    {
+      "floor": 0.55,
+      "off_topic_blocked": 0.733,
+      "in_scope_blocked": 0.0
+    },
+    {
+      "floor": 0.6,
+      "off_topic_blocked": 0.867,
+      "in_scope_blocked": 0.0
+    },
+    {
+      "floor": 0.65,
+      "off_topic_blocked": 0.867,
+      "in_scope_blocked": 0.02
+    },
+    {
+      "floor": 0.7,
+      "off_topic_blocked": 0.867,
+      "in_scope_blocked": 0.12
+    }
+  ],
+  "rule_floor": 0.6,
+  "chosen": 0.6,
+  "chosen_blocks_off_topic": 0.867,
+  "chosen_blocks_in_scope": 0.0
+}

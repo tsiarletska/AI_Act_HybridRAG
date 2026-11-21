@@ -1,0 +1,464 @@
+# E8 multilingual test questions: the dev retrieval questions translated by gemini-3.8-flash
+# on 2026-11-19, phrased as native non-lawyers would ask. FROZEN: generated once, not by `run`.
+# Not yet checked by native speakers: results based on them are provisional.
+# gold IDs are copied from the English set (chunk IDs are language-independent).
+- id: r01
+  style: natural
+  gold:
+  - art_5_1_c
+  en: Is social scoring by AI allowed?
+  lt: Ar leidžiama naudoti dirbtinį intelektą socialiniam vertinimui?
+  pl: Czy ocena społeczna przez sztuczną inteligencję jest dozwolona?
+  fi: Onko tekoälyllä tehtävä sosiaalinen pisteytys sallittua?
+  fr: Est-ce que la notation sociale par IA est autorisée ?
+- id: r02
+  style: natural
+  gold:
+  - art_5_1_f
+  en: Can employers use emotion recognition on their staff?
+  lt: Ar darbdaviai gali naudoti emocijų atpažinimo technologijas savo darbuotojams tikrinti?
+  pl: Czy pracodawcy mogą używać rozpoznawania emocji wobec swoich pracowników?
+  fi: Saavatko työnantajat käyttää tunteiden tunnistusta työntekijöihinsä?
+  fr: Les employeurs ont-ils le droit d'utiliser la reconnaissance des émotions sur leurs salariés ?
+- id: r03
+  style: natural
+  gold:
+  - art_5_1_e
+  en: Is it allowed to build a face recognition database by scraping images from the internet?
+  lt: Ar leidžiama kurti veido atpažinimo duomenų bazę renkant nuotraukas iš interneto?
+  pl: Czy można tworzyć bazę danych do rozpoznawania twarzy, pobierając zdjęcia z internetu?
+  fi: Onko sallittua luoda kasvojentunnistustietokantaa haravoimalla kuvia netistä?
+  fr: A-t-on le droit de créer une base de données de reconnaissance faciale en récupérant des images sur internet ?
+- id: r04
+  style: natural
+  gold:
+  - art_5_1_h
+  - art_5_2
+  - art_5_3
+  en: When can police use real-time remote biometric identification in public spaces?
+  lt: Kada policijai leidžiama naudoti nuotolinį biometrinį identifikavimą realiuoju laiku viešose vietose?
+  pl: Kiedy policja może korzystać ze zdalnej identyfikacji biometrycznej w czasie rzeczywistym w miejscach publicznych?
+  fi: Milloin poliisi saa käyttää reaaliaikaista biometristä etätunnistusta julkisissa tiloissa?
+  fr: Dans quels cas la police peut-elle utiliser l'identification biométrique à distance en temps réel dans l'espace public ?
+- id: r05
+  style: natural
+  gold:
+  - art_99_3
+  en: What is the maximum fine for using a prohibited AI practice?
+  lt: Kokia yra didžiausia bauda už draudžiamos dirbtinio intelekto praktikos taikymą?
+  pl: Jaka jest maksymalna kara za stosowanie zakazanych praktyk sztucznej inteligencji?
+  fi: Mikä on suurin mahdollinen sakko kielletyn tekoälykäytännön käytöstä?
+  fr: Quelle est l'amende maximale si on utilise une pratique d'IA interdite ?
+- id: r06
+  style: natural
+  gold:
+  - art_99_5
+  en: How much can a company be fined for supplying misleading information to authorities?
+  lt: Kokia bauda gali grėsti įmonei už klaidinančios informacijos teikimą valdžios institucijoms?
+  pl: Jak wysoką karę może dostać firma za przekazanie organom wprowadzających w błąd informacji?
+  fi: Kuinka paljon yritykselle voidaan antaa sakkoa harhaanjohtavien tietojen antamisesta viranomaisille?
+  fr: À combien d'amende s'expose une entreprise qui fournit de fausses informations aux autorités ?
+- id: r07
+  style: natural
+  gold:
+  - art_99_6
+  en: Are fines lower for SMEs and start-ups?
+  lt: Ar MVĮ ir startuoliams taikomos mažesnės baudos?
+  pl: Czy kary są niższe dla małych i średnich firm oraz startupów?
+  fi: Ovatko sakot pienempiä pk-yrityksille ja startupeille?
+  fr: Les amendes sont-elles moins élevées pour les PME et les start-ups ?
+- id: r08
+  style: natural
+  gold:
+  - art_101_1
+  en: What fines apply to providers of general-purpose AI models?
+  lt: Kokios baudos taikomos bendrosios paskirties dirbtinio intelekto modelių kūrėjams?
+  pl: Jakie kary grożą dostawcom modeli sztucznej inteligencji ogólnego przeznaczenia?
+  fi: Mitä sakkoja sovelletaan yleiskäyttöisten tekoälymallien tarjoajiin?
+  fr: Quelles sont les amendes prévues pour les fournisseurs de modèles d'IA à usage général ?
+- id: r09
+  style: natural
+  gold:
+  - art_4
+  en: Do companies have to train their staff on AI?
+  lt: Ar įmonės privalo apmokyti savo darbuotojus apie dirbtinį intelektą?
+  pl: Czy firmy muszą szkolić swoich pracowników z zakresu sztucznej inteligencji?
+  fi: Täytyykö yritysten kouluttaa henkilöstöään tekoälyn käyttöön?
+  fr: Les entreprises doivent-elles obligatoirement former leur personnel à l'IA ?
+- id: r10
+  style: natural
+  gold:
+  - art_27_1
+  en: Who must carry out a fundamental rights impact assessment?
+  lt: Kas privalo atlikti poveikio pagrindinėms teisėms vertinimą?
+  pl: Kto musi przeprowadzić ocenę wpływu na prawa podstawowe?
+  fi: Kenen täytyy tehdä perusoikeusvaikutusten arviointi?
+  fr: Qui doit faire une analyse d'impact sur les droits fondamentaux ?
+- id: r11
+  style: natural
+  gold:
+  - art_50_4
+  en: Do I have to tell people that an image is a deepfake?
+  lt: Ar privalau pranešti žmonėms, kad vaizdas yra suklastotas naudojant dirbtinį intelektą?
+  pl: Czy muszę informować ludzi, że dany obraz to deepfake?
+  fi: Täytyykö minun kertoa ihmisille, jos kuva on syväväärennös?
+  fr: Est-ce qu'on doit obligatoirement prévenir les gens quand une image est un hypertrucage ?
+- id: r12
+  style: natural
+  gold:
+  - art_50_1
+  en: Must users be informed that they are talking to a chatbot?
+  lt: Ar naudotojai turi būti informuoti, kad bendrauja su pokalbių robotu?
+  pl: Czy użytkownicy muszą wiedzieć, że rozmawiają z chatbotem?
+  fi: Pitääkö käyttäjille kertoa, että he juttelevat chatbotin kanssa?
+  fr: Faut-il obligatoirement informer les utilisateurs quand ils discutent avec un agent conversationnel ?
+- id: r13
+  style: natural
+  gold:
+  - art_50_2
+  en: Does AI-generated content need to be watermarked or marked as synthetic?
+  lt: Ar DI sukurtas turinys turi būti paženklintas vandenženkliu arba pažymėtas kaip sintetinė medžiaga?
+  pl: Czy treści wygenerowane przez sztuczną inteligencję muszą mieć znak wodny lub być oznaczone jako sztuczne?
+  fi: Pitääkö tekoälyn luomaan sisältöön laittaa vesileima tai merkitä se keinotekoiseksi?
+  fr: Est-ce que le contenu généré par IA doit être tagué avec un filigrane ou indiqué comme synthétique ?
+- id: r14
+  style: natural
+  gold:
+  - art_53_1
+  en: What documentation must providers of general-purpose AI models prepare?
+  lt: Kokią dokumentaciją privalo parengti bendrosios paskirties dirbtinio intelekto modelių teikėjai?
+  pl: Jaką dokumentację muszą przygotować dostawcy modeli sztucznej inteligencji ogólnego przeznaczenia?
+  fi: Mitä dokumentaatiota yleiskäyttöisten tekoälymallien tarjoajien pitää laatia?
+  fr: Quels documents techniques les créateurs de modèles d'IA à usage général doivent-ils préparer ?
+- id: r15
+  style: natural
+  gold:
+  - art_51_2
+  en: When is a general-purpose AI model presumed to have systemic risk based on training compute?
+  lt: Kada laikoma, kad bendrosios paskirties dirbtinio intelekto modelis kelia sisteminę riziką vertinant pagal jo mokymo skaičiavimo pajėgumus?
+  pl: Kiedy uznaje się, że model sztucznej inteligencji ogólnego przeznaczenia niesie ryzyko systemowe na podstawie mocy obliczeniowej użytej do treningu?
+  fi: Milloin yleiskäyttöisellä tekoälymallilla katsotaan olevan systeeminen riski koulutukseen käytetyn laskentatehon perusteella?
+  fr: À partir de quelle puissance de calcul d'entraînement estime-t-on qu'un modèle d'IA présente un risque systémique ?
+- id: r16
+  style: natural
+  gold:
+  - art_53_1
+  en: Do GPAI providers need a policy to comply with copyright law?
+  lt: Ar bendrosios paskirties DI teikėjai turi turėti autorių teisių laikymosi politiką?
+  pl: Czy dostawcy modeli ogólnego przeznaczenia muszą mieć politykę zgodności z prawem autorskim?
+  fi: Tarvitsevatko yleiskäyttöisen tekoälyn tarjoajat toimintaperiaatteet tekijänoikeuslain noudattamiseksi?
+  fr: Les développeurs de modèles d'IA à usage général doivent-ils respecter le droit d'auteur ?
+- id: r17
+  style: natural
+  gold:
+  - art_53_1
+  en: Do model providers have to publish a summary of the training data?
+  lt: Ar modelių kūrėjai privalo viešai paskelbti mokymui naudotų duomenų santrauką?
+  pl: Czy dostawcy modeli muszą publikować podsumowanie danych treningowych?
+  fi: Täytyykö mallien tarjoajien julkaista tiivistelmä koulutusdatasta?
+  fr: Les concepteurs de modèles sont-ils obligés de publier un résumé des données utilisées pour l'entraînement ?
+- id: r18
+  style: natural
+  gold:
+  - art_65
+  en: What is the European Artificial Intelligence Board and who sits on it?
+  lt: Kas yra Europos dirbtinio intelekto valdyba ir kas ją sudaro?
+  pl: Czym jest Europejska Rada ds. Sztucznej Inteligencji i kto w niej zasiada?
+  fi: Mikä on Euroopan tekoälyneuvosto ja ketkä siihen kuuluvat?
+  fr: C'est quoi le Comité européen de l'intelligence artificielle, et qui en fait partie ?
+- id: r19
+  style: natural
+  gold:
+  - art_57_1
+  - art_3_55
+  en: What are AI regulatory sandboxes and who must set them up?
+  lt: Kas yra bandomosios dirbtinio intelekto reglamentavimo aplinkos ir kas privalo jas įkurti?
+  pl: Czym są piaskownice regulacyjne sztucznej inteligencji i kto ma obowiązek je tworzyć?
+  fi: Mitä ovat tekoälyn sääntelyn testiympäristöt ja kenen täytyy perustaa sellainen?
+  fr: C'est quoi les bacs à sable réglementaires sur l'IA, et qui a l'obligation de les créer ?
+- id: r20
+  style: natural
+  gold:
+  - art_73_2
+  - art_73_3
+  - art_73_4
+  en: How quickly must a serious incident be reported?
+  lt: Per kiek laiko reikia pranešti apie rimtą incidentą?
+  pl: Jak szybko trzeba zgłosić poważny incydent?
+  fi: Kuinka nopeasti vakavasta vaaratilanteesta pitää ilmoittaa?
+  fr: Quel est le délai pour signaler un incident grave ?
+- id: r21
+  style: natural
+  gold:
+  - art_72
+  - art_3_25
+  en: What is post-market monitoring for high-risk AI?
+  lt: Kas yra didelės rizikos DI stebėsena po pateikimo rinkai?
+  pl: Na czym polega monitorowanie po wprowadzeniu na rynek systemów sztucznej inteligencji wysokiego ryzyka?
+  fi: Mitä suuririskisen tekoälyn markkinoille saattamisen jälkeinen seuranta tarkoittaa?
+  fr: En quoi consiste la surveillance après commercialisation pour une IA à haut risque ?
+- id: r22
+  style: natural
+  gold:
+  - art_14
+  en: What human oversight measures are required for high-risk AI systems?
+  lt: Kokių žmogaus atliekamos priežiūros priemonių reikalaujama didelės rizikos DI sistemoms?
+  pl: Jakie środki nadzoru ze strony człowieka są wymagane w przypadku systemów sztucznej inteligencji wysokiego ryzyka?
+  fi: Mitä ihmisen tekemän valvonnan toimia suuririskisiltä tekoälyjärjestelmiltä vaaditaan?
+  fr: Quelles sont les mesures de contrôle humain exigées pour les systèmes d'IA à haut risque ?
+- id: r23
+  style: natural
+  gold:
+  - art_10
+  en: What requirements apply to the training, validation and testing data sets?
+  lt: Kokie reikalavimai keliami mokymo, patvirtinimo ir testavimo duomenų rinkiniams?
+  pl: Jakie wymogi muszą spełniać zbiory danych treningowych, walidacyjnych i testowych?
+  fi: Mitä vaatimuksia sovelletaan koulutus-, validointi- ja testausaineistoihin?
+  fr: Quelles sont les règles à respecter pour les jeux de données d'entraînement, de validation et de test ?
+- id: r24
+  style: natural
+  gold:
+  - art_12_1
+  - art_19_1
+  - art_26_6
+  en: Must high-risk AI systems keep logs automatically?
+  lt: Ar didelės rizikos dirbtinio intelekto sistemos privalo automatiškai registruoti veiksmų žurnalus?
+  pl: Czy systemy sztucznej inteligencji wysokiego ryzyka muszą automatycznie zapisywać dzienniki zdarzeń?
+  fi: Pitääkö suuririskisten tekoälyjärjestelmien kerätä lokeja automaattisesti?
+  fr: Les systèmes d'IA à haut risque doivent-ils enregistrer automatiquement des journaux d'événements ?
+- id: r25
+  style: natural
+  gold:
+  - art_17_1
+  en: What should a quality management system for AI providers include?
+  lt: Ką turėtų apimti DI teikėjų kokybės vadybos sistema?
+  pl: Co powinien obejmować system zarządzania jakością u dostawców sztucznej inteligencji?
+  fi: Mitä tekoälyn tarjoajan laadunhallintajärjestelmän tulisi sisältää?
+  fr: Que doit contenir le système de gestion de la qualité mis en place par les fournisseurs d'IA ?
+- id: r26
+  style: natural
+  gold:
+  - art_23
+  en: What obligations do importers of high-risk AI systems have?
+  lt: Kokios pareigos tenka didelės rizikos dirbtinio intelekto sistemų importuotojams?
+  pl: Jakie obowiązki mają importerzy systemów sztucznej inteligencji wysokiego ryzyka?
+  fi: Mitä velvollisuuksia suuririskisten tekoälyjärjestelmien maahantuojilla on?
+  fr: Quelles sont les obligations imposées aux importateurs de systèmes d'IA à haut risque ?
+- id: r27
+  style: natural
+  gold:
+  - art_2_3
+  en: Does the regulation apply to AI used for military purposes?
+  lt: Ar šis reglamentas taikomas kariniais tikslais naudojamam dirbtiniam intelektui?
+  pl: Czy te przepisy dotyczą sztucznej inteligencji używanej do celów wojskowych?
+  fi: Koskeeko asetus sotilaallisiin tarkoituksiin käytettävää tekoälyä?
+  fr: Est-ce que le règlement s'applique aussi à l'IA utilisée dans le domaine militaire ?
+- id: r28
+  style: natural
+  gold:
+  - art_2_6
+  en: Is AI developed only for scientific research covered?
+  lt: Ar taisyklės galioja dirbtiniam intelektui, sukurtam išskirtinai mokslo tyrimų tikslais?
+  pl: Czy sztuczna inteligencja tworzona wyłącznie do badań naukowych podlega tym przepisom?
+  fi: Koskeeko asetus tekoälyä, jota kehitetään vain tieteelliseen tutkimukseen?
+  fr: Une IA créée uniquement pour la recherche scientifique est-elle concernée ?
+- id: r29
+  style: natural
+  gold:
+  - art_2_12
+  - art_53_2
+  en: Are open-source AI models exempt from the rules?
+  lt: Ar atvirojo kodo DI modeliams šios taisyklės netaikomos?
+  pl: Czy modele sztucznej inteligencji o otwartym kodzie źródłowym są zwolnione z tych zasad?
+  fi: Onko avoimen lähdekoodin tekoälymallit vapautettu säännöistä?
+  fr: Les modèles d'IA open source sont-ils exemptés des règles ?
+- id: r30
+  style: natural
+  gold:
+  - art_6_3
+  en: Can an AI system listed in Annex III escape the high-risk classification if it only performs a narrow procedural task?
+  lt: Ar III priede nurodyta DI sistema gali būti nelaikoma didelės rizikos sistema, jei ji atlieka tik siaurą procedūrinę užduotį?
+  pl: Czy system sztucznej inteligencji wymieniony w załączniku III może uniknąć uznania za wysokie ryzyko, jeśli wykonuje tylko wąskie zadanie proceduralne?
+  fi: Voiko liitteessä III lueteltu tekoälyjärjestelmä välttää suuririskisen luokituksen, jos se suorittaa vain kapea-alaisen menettelyllisen tehtävän?
+  fr: Un système d'IA mentionné à l'annexe III peut-il échapper à la catégorie haut risque s'il ne réalise qu'une tâche procédurale limitée ?
+- id: r31
+  style: natural
+  gold:
+  - anx_III_4
+  en: Is AI used to screen job applications considered high-risk?
+  lt: Ar dirbtinis intelektas, naudojamas gyvenimo aprašymams atsirinkti, laikomas keliančiu didelę riziką?
+  pl: Czy sztuczna inteligencja używana do sprawdzania aplikacji o pracę jest uznawana za wysokie ryzyko?
+  fi: Pidetäänkö työhakemusten seulonnassa käytettävää tekoälyä suuririskisenä?
+  fr: L'utilisation d'une IA pour trier les CV est-elle considérée comme à haut risque ?
+- id: r32
+  style: natural
+  gold:
+  - anx_III_5
+  en: Is AI used to evaluate creditworthiness high-risk?
+  lt: Ar kreditingumui vertinti naudojamas dirbtinis intelektas priskiriamas prie didelės rizikos sistemų?
+  pl: Czy sztuczna inteligencja służąca do oceny zdolności kredytowej to wysokie ryzyko?
+  fi: Onko luottokelpoisuuden arviointiin käytettävä tekoäly suuririskistä?
+  fr: Une IA qui évalue la solvabilité financière d'une personne est-elle classée à haut risque ?
+- id: r33
+  style: natural
+  gold:
+  - anx_III_3
+  en: Is an AI system that decides university admissions high-risk?
+  lt: Ar DI sistema, kuri sprendžia dėl priėmimo į universitetą, laikoma didelės rizikos sistema?
+  pl: Czy system sztucznej inteligencji decydujący o przyjęciu na studia jest systemem wysokiego ryzyka?
+  fi: Onko yliopistojen opiskelijavalinnoista päättävä tekoälyjärjestelmä suuririskistä?
+  fr: Un système d'IA qui décide des admissions à l'université est-il considéré à haut risque ?
+- id: r34
+  style: natural
+  gold:
+  - art_86_1
+  en: Do people have a right to an explanation of decisions made with high-risk AI?
+  lt: Ar žmonės turi teisę gauti paaiškinimą apie sprendimus, priimtus pasitelkus didelės rizikos DI?
+  pl: Czy ludzie mają prawo do wyjaśnienia decyzji podjętych przy pomocy sztucznej inteligencji wysokiego ryzyka?
+  fi: Onko ihmisillä oikeus saada perustelut päätöksille, jotka on tehty suuririskisen tekoälyn avulla?
+  fr: A-t-on le droit d'obtenir une explication quand une décision a été prise par une IA à haut risque ?
+- id: r35
+  style: natural
+  gold:
+  - art_85
+  en: Where can I file a complaint about an AI system that infringes the regulation?
+  lt: Kur galiu pateikti skundą dėl reglamentą pažeidžiančios dirbtinio intelekto sistemos?
+  pl: Gdzie mogę złożyć skargę na system sztucznej inteligencji, który narusza przepisy?
+  fi: Mihin voin tehdä valituksen tekoälyjärjestelmästä, joka rikkoo asetusta?
+  fr: Où est-ce qu'on peut porter plainte contre un système d'IA qui ne respecte pas le règlement ?
+- id: r36
+  style: natural
+  gold:
+  - art_113
+  en: When does the AI Act start to apply?
+  lt: Kada pradeda galioti Dirbtinio intelekto aktas?
+  pl: Od kiedy akt o sztucznej inteligencji zaczyna obowiązywać?
+  fi: Milloin tekoälyasetusta aletaan soveltaa?
+  fr: À partir de quand la loi sur l'IA s'applique-t-elle ?
+- id: r37
+  style: natural
+  gold:
+  - art_26
+  en: What obligations do deployers of high-risk AI systems have?
+  lt: Kokias pareigas turi didelės rizikos dirbtinio intelekto sistemų diegėjai?
+  pl: Jakie obowiązki mają podmioty wdrażające systemy sztucznej inteligencji wysokiego ryzyka?
+  fi: Mitä velvollisuuksia suuririskisten tekoälyjärjestelmien käyttöönottajilla on?
+  fr: Quelles sont les obligations des utilisateurs qui déploient des systèmes d'IA à haut risque ?
+- id: r38
+  style: natural
+  gold:
+  - art_16
+  en: What must providers of high-risk AI systems do?
+  lt: Ką privalo daryti didelės rizikos dirbtinio intelekto sistemų teikėjai?
+  pl: Co muszą robić dostawcy systemów sztucznej inteligencji wysokiego ryzyka?
+  fi: Mitä suuririskisten tekoälyjärjestelmien tarjoajien pitää tehdä?
+  fr: Que doivent faire les fournisseurs de systèmes d'IA à haut risque ?
+- id: r39
+  style: natural
+  gold:
+  - anx_IV
+  - art_11_1
+  en: What does the technical documentation of a high-risk AI system have to contain?
+  lt: Kas turi būti nurodyta didelės rizikos DI sistemos techninėje dokumentacijoje?
+  pl: Co musi zawierać dokumentacja techniczna systemu sztucznej inteligencji wysokiego ryzyka?
+  fi: Mitä suuririskisen tekoälyjärjestelmän teknisen dokumentaation pitää sisältää?
+  fr: Que doit contenir la documentation technique d'un système d'IA à haut risque ?
+- id: r40
+  style: natural
+  gold:
+  - art_48
+  en: How must the CE marking be affixed?
+  lt: Kaip turi būti pritvirtintas CE ženklas?
+  pl: Jak należy umieszczać oznakowanie CE?
+  fi: Miten CE-merkintä pitää kiinnittää?
+  fr: Comment doit être apposé le marquage CE ?
+- id: r41
+  style: natural
+  gold:
+  - art_3_4
+  en: What is a deployer?
+  lt: Kas yra diegėjas?
+  pl: Kim jest podmiot wdrażający?
+  fi: Mikä on käyttöönottaja?
+  fr: Qu'est-ce qu'un déployeur exactement ?
+- id: r42
+  style: natural
+  gold:
+  - art_3_1
+  en: How does the regulation define an AI system?
+  lt: Kaip šiame reglamente apibrėžiama dirbtinio intelekto sistema?
+  pl: Jak w tych przepisach definiuje się system sztucznej inteligencji?
+  fi: Miten tekoälyjärjestelmä määritellään asetuksessa?
+  fr: Quelle est la définition d'un système d'IA d'après le règlement ?
+- id: r43
+  style: natural
+  gold:
+  - art_3_49
+  en: What counts as a serious incident?
+  lt: Kas yra laikoma rimtu incidentu?
+  pl: Co uznaje się za poważny incydent?
+  fi: Mikä lasketaan vakavaksi vaaratilanteeksi?
+  fr: Qu'est-ce qui est considéré comme un incident grave ?
+- id: r44
+  style: ref
+  gold:
+  - art_6_2
+  en: What does Article 6(2) say?
+  lt: Kas rašoma 6 straipsnio 2 dalyje?
+  pl: O czym mówi artykuł 6 ustęp 2?
+  fi: Mitä 6 artiklan 2 kohdassa sanotaan?
+  fr: Que dit l'article 6, paragraphe 2 ?
+- id: r45
+  style: ref
+  gold:
+  - art_5_1_a
+  en: Summarise Article 5(1)(a).
+  lt: Apibendrink 5 straipsnio 1 dalies a punktą.
+  pl: Podsumuj artykuł 5 ustęp 1 litera a.
+  fi: Tee tiivistelmä 5 artiklan 1 kohdan a alakohdasta.
+  fr: Peux-tu me résumer l'article 5, paragraphe 1, point a) ?
+- id: r46
+  style: ref
+  gold:
+  - anx_III_8
+  en: What is listed in Annex III point 8?
+  lt: Kas nurodyta III priedo 8 punkte?
+  pl: Co znajduje się w punkcie 8 załącznika III?
+  fi: Mitä liitteen III kohdassa 8 luetellaan?
+  fr: Qu'y a-t-il au point 8 de l'annexe III ?
+- id: r47
+  style: ref
+  gold:
+  - rct_27
+  en: Explain recital 27.
+  lt: Paaiškink 27 konstatuojamąją dalį.
+  pl: Wyjaśnij motyw 27.
+  fi: Selitä johdanto-osan kappale 27.
+  fr: Explique-moi le considérant 27.
+- id: r48
+  style: ref
+  gold:
+  - art_99_4
+  en: What does Art. 99 para 4 cover?
+  lt: Apie ką kalbama 99 straipsnio 4 dalyje?
+  pl: Czego dotyczy artykuł 99 ustęp 4?
+  fi: Mitä 99 artiklan 4 kohta koskee?
+  fr: De quoi parle l'article 99, paragraphe 4 ?
+- id: r49
+  style: ref
+  gold:
+  - anx_XIII
+  en: What criteria are in Annex XIII?
+  lt: Kokie kriterijai pateikti XIII priede?
+  pl: Jakie kryteria znajdują się w załączniku XIII?
+  fi: Mitä kriteerejä liitteessä XIII on?
+  fr: Quels sont les critères précisés dans l'annexe XIII ?
+- id: r50
+  style: ref
+  gold:
+  - art_50
+  en: What does Article 50 require?
+  lt: Ko reikalaujama pagal 50 straipsnį?
+  pl: Czego wymaga artykuł 50?
+  fi: Mitä 50 artikla vaatii?
+  fr: Quelles sont les obligations imposées par l'article 50 ?

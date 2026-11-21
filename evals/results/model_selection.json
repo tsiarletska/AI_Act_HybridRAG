@@ -1,0 +1,67 @@
+{
+ "production": {
+  "run": "e2e_all_gemini-3.8-flash_legal",
+  "n_answers": 688,
+  "ttft_p50_s": 3.3,
+  "total_p50_s": 4.8,
+  "tokens_per_s_p50": 154
+ },
+ "n_shared": 676,
+ "n_cases": 1000,
+ "style": "legal",
+ "judge": "claude-sonnet-5-5",
+ "selected": "gemini_low",
+ "runs": [
+  {
+   "key": "gemini_low",
+   "model": "gemini-3.8-flash",
+   "thinking": "thinking low (0 thinking tokens)",
+   "run": "e2e_all_gemini-3.8-flash_legal",
+   "judge_overall": 9.12,
+   "correctness": 9.52,
+   "completeness": 9.15,
+   "grounding": 9.65,
+   "citations": 9.57,
+   "clarity": 9.06,
+   "facts_found": 614,
+   "first_word_p50_s": 1.8,
+   "first_word_p90_s": 2.2,
+   "first_word_max_s": 67.4,
+   "answer_cost_usd": 1.79
+  },
+  {
+   "key": "gemini_medium",
+   "model": "gemini-3.8-flash",
+   "thinking": "thinking medium",
+   "run": "e2e_all_gemini-3.8-flash_legal_think-medium",
+   "judge_overall": 9.09,
+   "correctness": 9.48,
+   "completeness": 9.16,
+   "grounding": 9.63,
+   "citations": 9.55,
+   "clarity": 9.02,
+   "facts_found": 611,
+   "first_word_p50_s": 6.3,
+   "first_word_p90_s": 10.0,
+   "first_word_max_s": 18.9,
+   "answer_cost_usd": 3.46
+  },
+  {
+   "key": "mistral_large4",
+   "model": "mistral-large-4",
+   "thinking": "reasoning low (lowest available)",
+   "run": "e2e_all_mistral-large-4_legal",
+   "judge_overall": 9.13,
+   "correctness": 9.5,
+   "completeness": 8.9,
+   "grounding": 9.71,
+   "citations": 9.64,
+   "clarity": 9.35,
+   "facts_found": 601,
+   "first_word_p50_s": 6.8,
+   "first_word_p90_s": 26.2,
+   "first_word_max_s": 102.8,
+   "answer_cost_usd": 1.98
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+{
+ "n_shared": 683,
+ "n_cases": 1000,
+ "model": "gemini-3.8-flash",
+ "judge": "claude-sonnet-5-5",
+ "selected": "legal",
+ "styles": [
+  {
+   "key": "legal",
+   "label": "Legal detail",
+   "judge_overall": 9.0,
+   "correctness": 9.46,
+   "completeness": 9.03,
+   "grounding": 9.65,
+   "citations": 9.53,
+   "clarity": 9.05,
+   "facts_found": 615,
+   "words_p50": 127,
+   "words_per_sentence_p50": 22.7,
+   "flesch_p50": 19,
+   "jargon_per_answer": 1.15,
+   "citations_p50": 5,
+   "ttft_p50_s": 3.3,
+   "answer_cost_usd": 1.79
+  },
+  {
+   "key": "plain",
+   "label": "Explanatory",
+   "judge_overall": 8.54,
+   "correctness": 9.11,
+   "completeness": 8.81,
+   "grounding": 9.27,
+   "citations": 9.27,
+   "clarity": 8.16,
+   "facts_found": 599,
+   "words_p50": 119,
+   "words_per_sentence_p50": 20.6,
+   "flesch_p50": 25,
+   "jargon_per_answer": 0.16,
+   "citations_p50": 6,
+   "ttft_p50_s": 3.3,
+   "answer_cost_usd": 1.74
+  }
+ ],
+ "plain_better": 82,
+ "plain_worse": 315,
+ "facts_lost": 17,
+ "facts_gained": 1
+}

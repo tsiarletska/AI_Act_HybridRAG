@@ -1,0 +1,129 @@
+{
+ "n": 395,
+ "n_rewritten": 320,
+ "k": 8,
+ "all": {
+  "original": {
+   "recall@1": 0.719,
+   "recall@3": 0.881,
+   "recall@5": 0.914,
+   "recall@8": 0.947,
+   "mrr@8": 0.803
+  },
+  "rewrite": {
+   "recall@1": 0.714,
+   "recall@3": 0.886,
+   "recall@5": 0.919,
+   "recall@8": 0.954,
+   "mrr@8": 0.804
+  },
+  "both": {
+   "recall@1": 0.737,
+   "recall@3": 0.894,
+   "recall@5": 0.922,
+   "recall@8": 0.957,
+   "mrr@8": 0.818
+  }
+ },
+ "rewritten_only": {
+  "original": {
+   "recall@1": 0.7,
+   "recall@3": 0.872,
+   "recall@5": 0.909,
+   "recall@8": 0.947,
+   "mrr@8": 0.789
+  },
+  "rewrite": {
+   "recall@1": 0.694,
+   "recall@3": 0.878,
+   "recall@5": 0.916,
+   "recall@8": 0.956,
+   "mrr@8": 0.791
+  },
+  "both": {
+   "recall@1": 0.722,
+   "recall@3": 0.887,
+   "recall@5": 0.919,
+   "recall@8": 0.956,
+   "mrr@8": 0.808
+  }
+ },
+ "paired": {
+  "rewrite vs original": {
+   "found_only_by_first@8": 7,
+   "found_only_by_second@8": 4,
+   "gold_ranked_higher_by_first": 41,
+   "gold_ranked_higher_by_second": 40
+  },
+  "both vs rewrite": {
+   "found_only_by_first@8": 3,
+   "found_only_by_second@8": 2,
+   "gold_ranked_higher_by_first": 34,
+   "gold_ranked_higher_by_second": 20
+  },
+  "both vs original": {
+   "found_only_by_first@8": 6,
+   "found_only_by_second@8": 2,
+   "gold_ranked_higher_by_first": 44,
+   "gold_ranked_higher_by_second": 31
+  }
+ },
+ "examples_lost_by_rewrite": [
+  {
+   "case": "e0074",
+   "original": "What information do authorities have to share when they report a risky or rule-breaking AI system?",
+   "rewrite": "What information do authorities have to share when they report a risky or rule-breaking AI system under the EU AI Act?",
+   "gold": "art_79_6"
+  },
+  {
+   "case": "e0112",
+   "original": "When the EU updates AI rules for specific industries, will they consider the existing laws and authorities in those sectors?",
+   "rewrite": "When the EU updates AI rules for specific industries, will they consider the existing laws and authorities in those sectors under the AI Act?",
+   "gold": "art_112_12"
+  },
+  {
+   "case": "e0158",
+   "original": "What happens if a company doesn't fix a risky AI system in time?",
+   "rewrite": "What are the penalties or consequences if a company fails to bring a risky AI system into compliance with the EU AI Act in time?",
+   "gold": "art_79_5"
+  },
+  {
+   "case": "e0196",
+   "original": "What happens if regulators suspect a general-purpose AI used for a high-risk task is breaking the rules?",
+   "rewrite": "What happens under the EU AI Act if regulators suspect a general-purpose AI model used for a high-risk task is breaking the rules?",
+   "gold": "art_75_2"
+  }
+ ],
+ "examples_gained_by_rewrite": [
+  {
+   "case": "e0067",
+   "original": "Do I need to include every single detail in the technical paperwork for my AI system?",
+   "rewrite": "Do I need to include every single detail in the technical documentation for my AI system under the EU AI Act?",
+   "gold": "anx_IV_intro"
+  },
+  {
+   "case": "e0166",
+   "original": "How do regulators have to handle the documents and data they collect from us?",
+   "rewrite": "How do regulators have to handle the documents and data they collect under the EU Artificial Intelligence Act?",
+   "gold": "art_74_14"
+  },
+  {
+   "case": "e0168",
+   "original": "What do companies using high-risk AI need to do to make sure they use it properly?",
+   "rewrite": "What are the obligations for deployers of high-risk AI systems under the EU AI Act?",
+   "gold": "art_26_1"
+  },
+  {
+   "case": "e0186",
+   "original": "What details and documents do I need to submit when registering a high-risk AI system?",
+   "rewrite": "What details and documents do I need to submit when registering a high-risk AI system under the EU AI Act?",
+   "gold": "anx_VIII_A_6-11"
+  },
+  {
+   "case": "e0239",
+   "original": "What details must be included when regulators ask a general-purpose AI provider for information?",
+   "rewrite": "What details must be included when regulators ask a general-purpose AI provider for information under the EU AI Act?",
+   "gold": "art_91_4"
+  }
+ ]
+}

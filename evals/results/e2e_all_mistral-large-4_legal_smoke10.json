@@ -1,0 +1,296 @@
+{
+  "experiment": "E9 end-to-end",
+  "run_id": "20261120T163248Z",
+  "path": "ChatService.stream (UI path, no retry)",
+  "workers": 1,
+  "style": "legal",
+  "models": {
+    "embed": "gemini-embedding-2",
+    "guard": "gemini-3.5-flash-lite",
+    "answer": "mistral-large-4"
+  },
+  "cases_file": "evals/e2e_cases.yaml",
+  "seconds": 108.8,
+  "retried_infra_errors": 0,
+  "reused_from": "",
+  "reused_cases": 0,
+  "n": 13,
+  "infra_errors": 0,
+  "dev": {
+    "pass": 0.8,
+    "categories": {
+      "ambiguous": {
+        "n": 1,
+        "pass": 1.0,
+        "paths": {
+          "clarification": 1
+        }
+      },
+      "code": {
+        "n": 1,
+        "pass": 0.0,
+        "paths": {
+          "answer": 1
+        }
+      },
+      "definition": {
+        "n": 1,
+        "pass": 1.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 1.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 1
+        }
+      },
+      "injection": {
+        "n": 1,
+        "pass": 1.0,
+        "paths": {
+          "refused_by_floor": 1
+        }
+      },
+      "multi_turn": {
+        "n": 1,
+        "pass": 1.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 1.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 1
+        }
+      },
+      "not_in_act": {
+        "n": 1,
+        "pass": 1.0,
+        "paths": {
+          "answer": 1
+        }
+      },
+      "provision": {
+        "n": 2,
+        "pass": 1.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 1.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 2
+        }
+      },
+      "rare_term": {
+        "n": 1,
+        "pass": 0.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 0.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 1
+        }
+      },
+      "scenario": {
+        "n": 1,
+        "pass": 1.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 1.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 1
+        }
+      }
+    }
+  },
+  "test": {
+    "pass": 1.0,
+    "categories": {
+      "off_topic": {
+        "n": 1,
+        "pass": 1.0,
+        "paths": {
+          "refused_by_floor": 1
+        }
+      },
+      "provision": {
+        "n": 2,
+        "pass": 1.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 1.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 2
+        }
+      }
+    }
+  },
+  "all": {
+    "pass": 0.846,
+    "categories": {
+      "ambiguous": {
+        "n": 1,
+        "pass": 1.0,
+        "paths": {
+          "clarification": 1
+        }
+      },
+      "code": {
+        "n": 1,
+        "pass": 0.0,
+        "paths": {
+          "answer": 1
+        }
+      },
+      "definition": {
+        "n": 1,
+        "pass": 1.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 1.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 1
+        }
+      },
+      "injection": {
+        "n": 1,
+        "pass": 1.0,
+        "paths": {
+          "refused_by_floor": 1
+        }
+      },
+      "multi_turn": {
+        "n": 1,
+        "pass": 1.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 1.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 1
+        }
+      },
+      "not_in_act": {
+        "n": 1,
+        "pass": 1.0,
+        "paths": {
+          "answer": 1
+        }
+      },
+      "off_topic": {
+        "n": 1,
+        "pass": 1.0,
+        "paths": {
+          "refused_by_floor": 1
+        }
+      },
+      "provision": {
+        "n": 4,
+        "pass": 1.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 1.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 4
+        }
+      },
+      "rare_term": {
+        "n": 1,
+        "pass": 0.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 0.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 1
+        }
+      },
+      "scenario": {
+        "n": 1,
+        "pass": 1.0,
+        "kind_ok": 1.0,
+        "gold_retrieved": 1.0,
+        "gold_cited": 1.0,
+        "facts_ok": 1.0,
+        "citations_valid": 1.0,
+        "paths": {
+          "answer": 1
+        }
+      }
+    }
+  },
+  "latency_by_path": {
+    "answer": {
+      "n": 10,
+      "p50_s": 4.86,
+      "p95_s": 27.26,
+      "total_p50_s": 6.29,
+      "total_p95_s": 28.47
+    },
+    "clarification": {
+      "n": 1,
+      "p50_s": 1.59,
+      "p95_s": 1.59
+    },
+    "refused_by_floor": {
+      "n": 2,
+      "p50_s": 0.45,
+      "p95_s": 0.48
+    }
+  },
+  "latency_by_step": {
+    "prefilter": {
+      "n": 13,
+      "p50_ms": 0.0,
+      "p95_ms": 0.1
+    },
+    "floor": {
+      "n": 12,
+      "p50_ms": 428.1,
+      "p95_ms": 597.0
+    },
+    "guard": {
+      "n": 11,
+      "p50_ms": 934.2,
+      "p95_ms": 1108.3
+    },
+    "retrieve": {
+      "n": 10,
+      "p50_ms": 402.4,
+      "p95_ms": 590.4
+    },
+    "answer_first_token": {
+      "n": 10,
+      "p50_ms": 3509.9,
+      "p95_ms": 26157.6
+    },
+    "answer": {
+      "n": 10,
+      "p50_ms": 4940.0,
+      "p95_ms": 27368.6
+    },
+    "postcheck": {
+      "n": 10,
+      "p50_ms": 0.2,
+      "p95_ms": 0.9
+    }
+  },
+  "cost": {
+    "total_usd": 0.0253,
+    "per_100_cases_usd": 0.1944
+  }
+}

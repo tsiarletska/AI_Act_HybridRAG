@@ -1,0 +1,179 @@
+{
+ "n_cases_scored": 99,
+ "models": {
+  "mistral-large-4 (reasoning low)": {
+   "n": 99,
+   "human_mean": 9.05,
+   "sonnet_mean": 8.95
+  },
+  "gemini-3.8-flash (thinking medium)": {
+   "n": 99,
+   "human_mean": 8.99,
+   "sonnet_mean": 9.11
+  },
+  "gemini-3.8-flash (thinking low)": {
+   "n": 99,
+   "human_mean": 8.82,
+   "sonnet_mean": 9.13
+  }
+ },
+ "pairwise_human": {
+  "gemini-3.8-flash (thinking low) vs gemini-3.8-flash (thinking medium)": {
+   "first_better": 22,
+   "second_better": 34,
+   "tie": 43
+  },
+  "gemini-3.8-flash (thinking low) vs mistral-large-4 (reasoning low)": {
+   "first_better": 27,
+   "second_better": 45,
+   "tie": 27
+  },
+  "gemini-3.8-flash (thinking medium) vs mistral-large-4 (reasoning low)": {
+   "first_better": 30,
+   "second_better": 41,
+   "tie": 28
+  }
+ },
+ "agreement": {
+  "n_answers": 297,
+  "human_mean": 8.95,
+  "sonnet_mean": 9.06,
+  "exact": 96,
+  "within_1": 223,
+  "judge_higher": 136,
+  "human_higher": 65,
+  "pearson": 0.09,
+  "spearman": 0.14,
+  "human_distribution": {
+   "6.0": 1,
+   "7.0": 17,
+   "8.0": 73,
+   "9.0": 110,
+   "10.0": 96
+  },
+  "sonnet_distribution": {
+   "2.0": 4,
+   "3.0": 9,
+   "4.0": 2,
+   "6.0": 1,
+   "7.0": 8,
+   "8.0": 27,
+   "9.0": 89,
+   "10.0": 157
+  }
+ },
+ "largest_gaps": [
+  {
+   "case": "e0654",
+   "topic": "ambiguous",
+   "model": "mistral-large-4 (reasoning low)",
+   "human": 10.0,
+   "sonnet": 2.0
+  },
+  {
+   "case": "e0654",
+   "topic": "ambiguous",
+   "model": "gemini-3.8-flash (thinking medium)",
+   "human": 10.0,
+   "sonnet": 2.0
+  },
+  {
+   "case": "e0660",
+   "topic": "ambiguous",
+   "model": "gemini-3.8-flash (thinking medium)",
+   "human": 10.0,
+   "sonnet": 3.0
+  },
+  {
+   "case": "e0693",
+   "topic": "off_topic",
+   "model": "gemini-3.8-flash (thinking medium)",
+   "human": 9.0,
+   "sonnet": 3.0
+  },
+  {
+   "case": "e0693",
+   "topic": "off_topic",
+   "model": "gemini-3.8-flash (thinking low)",
+   "human": 9.0,
+   "sonnet": 3.0
+  },
+  {
+   "case": "e0660",
+   "topic": "ambiguous",
+   "model": "mistral-large-4 (reasoning low)",
+   "human": 9.0,
+   "sonnet": 3.0
+  },
+  {
+   "case": "e0660",
+   "topic": "ambiguous",
+   "model": "gemini-3.8-flash (thinking low)",
+   "human": 9.0,
+   "sonnet": 3.0
+  },
+  {
+   "case": "e0654",
+   "topic": "ambiguous",
+   "model": "gemini-3.8-flash (thinking low)",
+   "human": 8.0,
+   "sonnet": 2.0
+  }
+ ],
+ "by_topic_human": {
+  "ambiguous": {
+   "mistral-large-4 (reasoning low)": 9.5,
+   "gemini-3.8-flash (thinking medium)": 10.0,
+   "gemini-3.8-flash (thinking low)": 8.5,
+   "n": 2
+  },
+  "definition": {
+   "mistral-large-4 (reasoning low)": 9.56,
+   "gemini-3.8-flash (thinking medium)": 8.89,
+   "gemini-3.8-flash (thinking low)": 9.22,
+   "n": 9
+  },
+  "injection": {
+   "mistral-large-4 (reasoning low)": 9.5,
+   "gemini-3.8-flash (thinking medium)": 8.5,
+   "gemini-3.8-flash (thinking low)": 8.0,
+   "n": 2
+  },
+  "multi_turn": {
+   "mistral-large-4 (reasoning low)": 9.11,
+   "gemini-3.8-flash (thinking medium)": 8.67,
+   "gemini-3.8-flash (thinking low)": 9.11,
+   "n": 9
+  },
+  "not_in_act": {
+   "mistral-large-4 (reasoning low)": 9.0,
+   "gemini-3.8-flash (thinking medium)": 9.5,
+   "gemini-3.8-flash (thinking low)": 9.0,
+   "n": 2
+  },
+  "off_topic": {
+   "mistral-large-4 (reasoning low)": 6.0,
+   "gemini-3.8-flash (thinking medium)": 9.0,
+   "gemini-3.8-flash (thinking low)": 9.0,
+   "n": 1
+  },
+  "provision": {
+   "mistral-large-4 (reasoning low)": 8.95,
+   "gemini-3.8-flash (thinking medium)": 9.05,
+   "gemini-3.8-flash (thinking low)": 8.75,
+   "n": 57
+  },
+  "rare_term": {
+   "mistral-large-4 (reasoning low)": 8.78,
+   "gemini-3.8-flash (thinking medium)": 9.11,
+   "gemini-3.8-flash (thinking low)": 8.89,
+   "n": 9
+  },
+  "scenario": {
+   "mistral-large-4 (reasoning low)": 9.62,
+   "gemini-3.8-flash (thinking medium)": 8.62,
+   "gemini-3.8-flash (thinking low)": 8.62,
+   "n": 8
+  }
+ }
+}

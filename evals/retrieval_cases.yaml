@@ -1,0 +1,56 @@
+# Retrieval eval: does the right unit of the Act come back for a question?
+# gold: list of acceptable chunk IDs or parents. A retrieved chunk matches a gold ID when
+#   chunk.id == gold, chunk.id starts with gold + "_", or chunk.parent == gold.
+# Gold IDs were located by phrase search over data/processed/chunks.jsonl (not from memory).
+# style: "natural" = paraphrased user question, "ref" = names the article/annex explicitly.
+
+- {id: r01, style: natural, q: "Is social scoring by AI allowed?", gold: [art_5_1_c]}
+- {id: r02, style: natural, q: "Can employers use emotion recognition on their staff?", gold: [art_5_1_f]}
+- {id: r03, style: natural, q: "Is it allowed to build a face recognition database by scraping images from the internet?", gold: [art_5_1_e]}
+- {id: r04, style: natural, q: "When can police use real-time remote biometric identification in public spaces?", gold: [art_5_1_h, art_5_2, art_5_3]}
+- {id: r05, style: natural, q: "What is the maximum fine for using a prohibited AI practice?", gold: [art_99_3]}
+- {id: r06, style: natural, q: "How much can a company be fined for supplying misleading information to authorities?", gold: [art_99_5]}
+- {id: r07, style: natural, q: "Are fines lower for SMEs and start-ups?", gold: [art_99_6]}
+- {id: r08, style: natural, q: "What fines apply to providers of general-purpose AI models?", gold: [art_101_1]}
+- {id: r09, style: natural, q: "Do companies have to train their staff on AI?", gold: [art_4]}
+- {id: r10, style: natural, q: "Who must carry out a fundamental rights impact assessment?", gold: [art_27_1]}
+- {id: r11, style: natural, q: "Do I have to tell people that an image is a deepfake?", gold: [art_50_4]}
+- {id: r12, style: natural, q: "Must users be informed that they are talking to a chatbot?", gold: [art_50_1]}
+- {id: r13, style: natural, q: "Does AI-generated content need to be watermarked or marked as synthetic?", gold: [art_50_2]}
+- {id: r14, style: natural, q: "What documentation must providers of general-purpose AI models prepare?", gold: [art_53_1]}
+- {id: r15, style: natural, q: "When is a general-purpose AI model presumed to have systemic risk based on training compute?", gold: [art_51_2]}
+- {id: r16, style: natural, q: "Do GPAI providers need a policy to comply with copyright law?", gold: [art_53_1]}
+- {id: r17, style: natural, q: "Do model providers have to publish a summary of the training data?", gold: [art_53_1]}
+- {id: r18, style: natural, q: "What is the European Artificial Intelligence Board and who sits on it?", gold: [art_65]}
+- {id: r19, style: natural, q: "What are AI regulatory sandboxes and who must set them up?", gold: [art_57_1, art_3_55]}
+- {id: r20, style: natural, q: "How quickly must a serious incident be reported?", gold: [art_73_2, art_73_3, art_73_4]}
+- {id: r21, style: natural, q: "What is post-market monitoring for high-risk AI?", gold: [art_72, art_3_25]}
+- {id: r22, style: natural, q: "What human oversight measures are required for high-risk AI systems?", gold: [art_14]}
+- {id: r23, style: natural, q: "What requirements apply to the training, validation and testing data sets?", gold: [art_10]}
+- {id: r24, style: natural, q: "Must high-risk AI systems keep logs automatically?", gold: [art_12_1, art_19_1, art_26_6]}
+- {id: r25, style: natural, q: "What should a quality management system for AI providers include?", gold: [art_17_1]}
+- {id: r26, style: natural, q: "What obligations do importers of high-risk AI systems have?", gold: [art_23]}
+- {id: r27, style: natural, q: "Does the regulation apply to AI used for military purposes?", gold: [art_2_3]}
+- {id: r28, style: natural, q: "Is AI developed only for scientific research covered?", gold: [art_2_6]}
+- {id: r29, style: natural, q: "Are open-source AI models exempt from the rules?", gold: [art_2_12, art_53_2]}
+- {id: r30, style: natural, q: "Can an AI system listed in Annex III escape the high-risk classification if it only performs a narrow procedural task?", gold: [art_6_3]}
+- {id: r31, style: natural, q: "Is AI used to screen job applications considered high-risk?", gold: [anx_III_4]}
+- {id: r32, style: natural, q: "Is AI used to evaluate creditworthiness high-risk?", gold: [anx_III_5]}
+- {id: r33, style: natural, q: "Is an AI system that decides university admissions high-risk?", gold: [anx_III_3]}
+- {id: r34, style: natural, q: "Do people have a right to an explanation of decisions made with high-risk AI?", gold: [art_86_1]}
+- {id: r35, style: natural, q: "Where can I file a complaint about an AI system that infringes the regulation?", gold: [art_85]}
+- {id: r36, style: natural, q: "When does the AI Act start to apply?", gold: [art_113]}
+- {id: r37, style: natural, q: "What obligations do deployers of high-risk AI systems have?", gold: [art_26]}
+- {id: r38, style: natural, q: "What must providers of high-risk AI systems do?", gold: [art_16]}
+- {id: r39, style: natural, q: "What does the technical documentation of a high-risk AI system have to contain?", gold: [anx_IV, art_11_1]}
+- {id: r40, style: natural, q: "How must the CE marking be affixed?", gold: [art_48]}
+- {id: r41, style: natural, q: "What is a deployer?", gold: [art_3_4]}
+- {id: r42, style: natural, q: "How does the regulation define an AI system?", gold: [art_3_1]}
+- {id: r43, style: natural, q: "What counts as a serious incident?", gold: [art_3_49]}
+- {id: r44, style: ref, q: "What does Article 6(2) say?", gold: [art_6_2]}
+- {id: r45, style: ref, q: "Summarise Article 5(1)(a).", gold: [art_5_1_a]}
+- {id: r46, style: ref, q: "What is listed in Annex III point 8?", gold: [anx_III_8]}
+- {id: r47, style: ref, q: "Explain recital 27.", gold: [rct_27]}
+- {id: r48, style: ref, q: "What does Art. 99 para 4 cover?", gold: [art_99_4]}
+- {id: r49, style: ref, q: "What criteria are in Annex XIII?", gold: [anx_XIII]}
+- {id: r50, style: ref, q: "What does Article 50 require?", gold: [art_50]}

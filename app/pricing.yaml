@@ -1,0 +1,19 @@
+# USD per 1M tokens, paid tier. Source: https://aistudio.google.com/docs/pricing, read 2026-11-18.
+# Thinking tokens are billed at the output rate. Prices carry effective dates: cost is computed
+# with the price valid on the day of the request.
+# Mistral: https://mistral.ai/pricing, read 2026-11-20. Reasoning tokens are billed as output.
+gemini-3.8-flash:
+  - {from: "2026-01-01", input: 0.75, output: 3.75}
+  - {from: "2027-01-01", input: 1.50, output: 7.50}
+gemini-4-hydrogen:
+  - {from: "2026-01-01", input: 1.50, output: 7.50}
+gemini-3.5-flash-lite:
+  - {from: "2026-01-01", input: 0.30, output: 2.50}
+gemini-3.1-flash-lite:
+  - {from: "2026-01-01", input: 0.25, output: 1.50}
+gemini-embedding-2:
+  - {from: "2026-01-01", input: 0.20, output: 0.0}
+mistral-large-4:
+  - {from: "2026-01-01", input: 0.70, output: 2.10}
+mistral-small-latest:
+  - {from: "2026-01-01", input: 0.15, output: 0.60}

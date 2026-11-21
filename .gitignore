@@ -1,0 +1,14 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+data/processed/embeddings_*.npy
+!data/processed/embeddings_gemini2_*.npy
+*.sqlite3
+.ipynb_checkpoints/
+data/processed/chunking/
+
+# stray screenshots in the project root
+/*.png
