@@ -20,3 +20,4 @@ data/processed/embeddings_gemini1_*.npy
 evals/results/*.csv
 evals/review/
 *.png
+!app/web/*.png
