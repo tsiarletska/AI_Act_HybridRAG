@@ -6,7 +6,7 @@ const $ = (s, el = document) => el.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 // ------------------------------------------------------------------ tabs
-const TAB_TITLES = { chat: "Chat", scheme: "Scheme", source: "Source code", evaluation: "Evaluation", agentic: "Agentic usage" };
+const TAB_TITLES = { chat: "Chat", scheme: "Scheme", source: "Source code", evaluation: "Evaluation", production: "Production", agentic: "Agentic usage" };
 document.querySelectorAll(".tabs button[data-tab]").forEach((b) =>
   b.addEventListener("click", () => { showTab(b.dataset.tab); closeMobileSidebar(); }));
 const loaded = {};
@@ -14,7 +14,7 @@ function showTab(name) {
   document.querySelectorAll(".tabs button[data-tab]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === name)));
   document.querySelectorAll(".tab").forEach((s) => s.classList.toggle("active", s.id === `tab-${name}`));
   $("#crumb").textContent = TAB_TITLES[name] || "";
-  if (!loaded[name]) { loaded[name] = true; ({ scheme: loadScheme, source: loadSource, evaluation: loadEvals, agentic: () => loadDoc("log") })[name]?.(); }
+  if (!loaded[name]) { loaded[name] = true; ({ scheme: loadScheme, source: loadSource, evaluation: loadEvals, production: () => loadDoc("production", "#doc-production"), agentic: () => loadDoc("log") })[name]?.(); }
   try { history.replaceState(null, "", `#${name}`); } catch {}
 }
 
@@ -323,13 +323,18 @@ const bar = (v) => `<td class="num bar"><i style="width:${Math.round((v || 0) * 
 async function loadEvals() {
   const e = await (await fetch("/api/evals")).json();
   const R = e.retrieval, P = (k) => R[k]?.metrics?.product;
-  const g2d = P("dev_gemini2"), g2t = P("test_gemini2");
   let h = `<div class="page-head"><h1>Evaluation</h1><p class="page-desc">Deterministic evaluations, plus an LLM judge for the generation model. Every decision was made on a dev set and confirmed once on a frozen test set; a gap under 5 points counts as a tie.</p></div>`;
+  // headline tiles: one per stage (chunking, retrieval, generation quality, generation speed)
+  const chDev = e.chunking.dev || {};
+  const chAlt = Object.entries(chDev).filter(([k, v]) => k !== "structural" && v?.dense).map(([, v]) => v.dense["recall@500w"]);
+  const altRange = chAlt.length ? `${pct(Math.min(...chAlt))}–${pct(Math.max(...chAlt))}` : "–";
+  const genSel = e.generation?.runs.find((r) => r.key === e.generation.selected);
+  const ablDev = R.dev_local?.metrics;
   h += `<div class="cards">
-    <div class="card"><div class="k">Retrieval recall@5 (test)</div><div class="v">${pct(g2t?.["recall@5"])}</div><div class="d">right provision in the top 5 · 25 held-out questions</div></div>
-    <div class="card"><div class="k">Retrieval recall@1 (test)</div><div class="v">${pct(g2t?.["recall@1"])}</div><div class="d">dev ${pct(g2d?.["recall@1"])} · 50 questions</div></div>
-    <div class="card"><div class="k">Off-topic blocked before any LLM call</div><div class="v">${pct(e.floors.gemini2?.chosen_blocks_off_topic)}</div><div class="d">relevance floor ${e.floors.gemini2?.chosen} · 0 in-scope blocked</div></div>
-    <div class="card"><div class="k">Chunking: recall at 500 words (test)</div><div class="v">${pct(e.chunking.test?.structural?.dense?.["recall@500w"])}</div><div class="d">structural chunks vs 0.52–0.92 for alternatives</div></div>
+    <div class="card"><div class="k">Chunking: recall at 500 words (dev)</div><div class="v">${pct(chDev.structural?.dense?.["recall@500w"])}</div><div class="d">selected structural chunking · alternatives ${altRange} · ${chDev._n ?? "–"} questions</div></div>
+    <div class="card"><div class="k">Retrieval ablation: recall@5 (dev)</div><div class="v">${pct(ablDev?.product?.["recall@5"])}</div><div class="d">full pipeline vs BM25 alone ${pct(ablDev?.bm25?.["recall@5"])} · local embeddings</div></div>
+    <div class="card"><div class="k">LLM-as-judge overall (0–10)</div><div class="v">${genSel ? genSel.judge_overall.toFixed(2) : "–"}</div><div class="d">selected <code>${genSel?.model ?? "–"}</code> · ${e.generation?.n_shared ?? "–"} cases · Claude Sonnet 5.5</div></div>
+    <div class="card"><div class="k">TTFT, median (selected model)</div><div class="v">${genSel ? `${genSel.first_word_p50_s.toFixed(1)} s` : "–"}</div><div class="d">generation model only · ${e.generation?.production?.ttft_p50_s != null ? `${e.generation.production.ttft_p50_s.toFixed(1)} s` : "–"} including guard and retrieval</div></div>
   </div>`;
   // evaluation methodology: how the measurements turned into decisions
   h += `<div class="block"><h3>Eval methodology</h3>
@@ -477,18 +482,18 @@ $("#toggle-theme").addEventListener("click", () => {
   applyTheme(t);
   try { localStorage.setItem("aiact.theme", t); } catch {}
 });
-async function loadDoc(name) {
+async function loadDoc(name, target = "#doc") {
   const d = await (await fetch(`/api/docs/${name}`)).json();
-  $("#doc").innerHTML = d.html; // our own repository docs, rendered server-side
+  $(target).innerHTML = d.html; // our own repository docs, rendered server-side
 }
 
 window.addEventListener("hashchange", () => {
   const h = location.hash.slice(1);
-  if (["chat", "scheme", "source", "evaluation", "agentic"].includes(h)) showTab(h);
+  if (["chat", "scheme", "source", "evaluation", "production", "agentic"].includes(h)) showTab(h);
 });
 
 // ------------------------------------------------------------------ boot
 loadInfo();
 restore().then(enableExport);
 const start = location.hash.slice(1);
-if (["scheme", "source", "evaluation", "agentic"].includes(start)) showTab(start);
+if (["scheme", "source", "evaluation", "production", "agentic"].includes(start)) showTab(start);

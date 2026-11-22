@@ -1032,6 +1032,78 @@ Proposed, not built: delete on "New conversation", deletion after 24 hours idle,
 - Confirmed the main gap: `docs/PRODUCTION.md`, promised in PLAN for the assignment's "feasibility, target design and effort estimation", does not exist; neither does `DECISION.md`, still referenced by PLAN, EVALUATION_LOG and dead API code. `architecture.html` dates from 2026-11-19.
 - Recommended order: PRODUCTION.md first, then stale docs, then cleanup, then the user's target diagram page; cross-reference expansion deferred to the pilot plan unless time allows; then deploy.
 
+### Turn 95 — 2026-11-21 · Removing sentences with bad citations? Repository on GitHub
+
+**User:** "i actually dont know meyb in case we have invalid citation, we just remove the sentence form the responce? ok so lets do then the repo on the github, we also need gitignore file to ignore .env"; then chose a public repository named `AI_Act_HybridRAG`.
+
+**Agent actions:**
+- Checked the two genuine unverified citations in run 1 before answering. Both statements are correct with a wrong article number: "five years from the termination date of the subcontracting" cited as Art. 34(4), which does not exist (the source, Art. 33(4), was sent); and the notification of suspension or termination cited as Art. 60(5) (the source, Art. 60(8), was sent). Removing the sentence would delete correct information, so the in-place red warning was kept.
+- Before the first push:
+  - removed the dead `DECISION.md` reader from `/api/evals` (and its unused import);
+  - wrote `evals/results/DECISION.md` (generation model, answer style, query rewriting, with numbers), which PLAN and EVALUATION_LOG refer to;
+  - marked `docs/architecture.html` as the first version, pointing to the Scheme page;
+  - added `/*.png` to `.gitignore` for the stray root screenshot.
+
+  `.gitignore` already excluded `.env`, `.venv`, SQLite files and unused embedding caches; verified with `git check-ignore`. 98 tests pass.
+- Initialised git (`main`), dry-ran the add (119 files, 27 MB, no `.env`), committed with the user's configured identity, and created and pushed the public repository with the user's `gh` login: https://github.com/tsiarletska/AI_Act_HybridRAG. Confirmed through the GitHub API that `.env` is absent.
+
+### Turn 96 — 2026-11-21 · Methodology review; open items for 2026-11-22
+
+**User:** "read the methodlofy file is there is"; then "ok so we have finished on the production file" and "log tomorrow we need to find favicon".
+
+**Agent actions:**
+- Read `docs/METHODOLOGY.md` and listed its stale parts: the status line, E9 "to be re-run", the model-selection section still marked planned, 90 tests (now 98), the timeline stopping at Turn 18, and the deployment and repository not mentioned. Not fixed yet.
+- Found no `PRODUCTION.md` in the repository, although the user considers it finished. To be checked.
+
+**To do on 2026-11-22:**
+- Find a favicon for the web app. `app/web/` has none at the moment.
+
+### Turn 97 — 2026-11-22 · Effort to finish; production document written
+
+**User:** asked how many hours remain to finish the development plan (feasibility) and deploy on Railway; then pasted an external reviewer's outline for `docs/PRODUCTION.md` (summary, feasibility with evidence, cost model, risks, target design, effort, proven vs not proven).
+
+**Agent actions:**
+- Estimated 5–7 hours: Railway deploy and live check 1.5–2 h, production document 2.5–3.5 h, methodology update 0.5–1 h, README 0.5 h, favicon 0.25 h.
+- Wrote `docs/PRODUCTION.md` on the reviewer's structure, with figures recomputed from run 1 instead of the reviewer's illustrations: facts found 615/628, false refusals 3/628, 266/276 unwanted requests stopped, 0 injections obeyed, time to first word 3.3 s median (1.8 s is the answer model alone), $0.0026 per answer. The reviewer's "7% invalid citations" was replaced by the current 0.4%. Cost model: ~$40 / ~$800 a month at 500 / 10,000 questions a day (today's prices, +30% margin), ~$75 / ~$1,500 from January 2027. Effort figures are marked as estimates: ~17 weeks, ~40 person-weeks, internal pilot after ~7 weeks.
+
+### Turn 98 — 2026-11-22 · Gemini price check; Scalability section proposed; new evaluation tiles
+
+**User:** asked whether Gemini 3.8 Flash prices rise in January; asked for the local site link and what a new "Scalability" section could contain (authentication instead of traffic limits, model cost per traffic tier, Railway hosting cost, multilingual); then asked to replace the four evaluation tiles (two were retrieval) with: chunking accuracy on dev, LLM-judge overall for the selected model, TTFT median for the selected model, retrieval ablation recall.
+
+**Agent actions:**
+- Re-read the Gemini pricing page: 3.8 Flash goes from $0.75 / $3.75 to $1.50 / $7.50 per 1M tokens on 1 Jan 2027, as in `app/pricing.yaml`; no change announced for the guard model or the embedder.
+- Started the app locally (http://127.0.0.1:7860). Proposed the Scalability content: limits become per-user quotas (the global cap stays), what breaks first (SQLite, in-process rate limiter, in-memory index), provider quotas, load test, caching, corpus growth, multilingual cost, EU region, retention. Railway prices still to be fetched.
+- Evaluation tiles (`app/web/app.js`), all read from `/api/evals`: chunking recall at 500 words on dev 0.94 (alternatives 0.42–0.90); retrieval ablation recall@5 on dev 0.94 (BM25 alone 0.66); judge overall 9.12 for `gemini-3.8-flash`; TTFT median 1.8 s for the generation model, with 3.3 s including guard and retrieval in the subtitle.
+
+### Turn 99 — 2026-11-22 · Railway prices; Scalability section
+
+**User:** "yes, fetch railway prices and write the scalability section"; caching repeated questions as a further development idea; multilingual as further development, without a cost estimate; authentication as further development (own history), not a traffic measure; Scalability as its own section.
+
+**Agent actions:**
+- Read railway.com/pricing and the Railway docs (plans, regions) on 2026-11-22: memory $10 per GB-month, CPU $20 per vCPU-month, volumes $0.15 per GB-month, egress $0.05 per GB, per-second billing; Hobby $5 and Pro $20 a month including the same amount of usage; Pro up to 42 replicas; one EU region, EU West (Amsterdam).
+- Added `docs/PRODUCTION.md` §4 Scalability: running cost by traffic (pilot 500/day, production 10,000/day, large 100,000/day; model cost today and from January 2027; Railway set-up and estimated monthly cost, from the measured 105 MB memory and 1 KB answer / 65 KB page); what changes as traffic grows (SQLite → Postgres, in-process rate limiter → Redis, global cap of 1,500/day to raise, provider quota, EU region, retention); further development ideas (answer cache, user accounts with own history, multilingual). The cost model moved there from §1; Effort became §5, proven/not proven §6.
+- Removed authentication from the effort phases, the target-design table, the diagram and the abuse mitigation, and multilingual from the effort doublers, as both are further development.
+
+### Turn 100 — 2026-11-22 · Production page on the site
+
+**User:** "hmm but i dont see a nerw section on the web site".
+
+**Agent actions:** added a **Production** tab between Evaluation and Agentic usage that renders `docs/PRODUCTION.md` (all six sections, Scalability as §4) through the existing `/api/docs/{name}` endpoint (`app/api.py` `DOCS`, `app/web/index.html`, `app/web/app.js`). Restarted the local server; the endpoint returns all section headings; 98 tests pass.
+
+### Turn 101 — 2026-11-22 · Production page trimmed
+
+**User:** after checking the Production tab: remove the "From prototype to production" opening (title, introduction, summary); risks as a list without likelihood and impact, with a short mitigation for the first risk; remove Target design; keep Scalability, with "what has to change as traffic grows" as a short list (app container, database, traffic limit per user, stored conversations) and the further development ideas; remove the Effort estimate and "What the prototype proved and what it did not".
+
+**Agent actions:** rewrote `docs/PRODUCTION.md` to three sections (1 Feasibility, 2 Risks and mitigations, 3 Scalability), renumbered cross-references, moved the run-1 provenance note under the feasibility table, and updated the Production tab description and the METHODOLOGY records table.
+
+### Turn 102 — 2026-11-22 · Favicon; repository update
+
+**User:** "lets add some favicon. what dimenstions shall i think about here? and then we need to update repo on the GitHUB".
+
+**Agent actions:**
+- Made the favicon from the § mark the sidebar already uses (dark rounded square, white §): `app/web/favicon.svg` (scales to any size), `favicon.ico` with 16, 32 and 48 px for older browsers and bookmarks, and a 180 px `apple-touch-icon.png` for iOS home screens. Linked them in `index.html` and served `/favicon.ico` at the site root (`app/api.py`). 98 tests pass.
+- Committed the day's work (production page, evaluation tiles, favicon, documentation fixes) and pushed it to `main`.
+
 ---
 
 ## How the output was validated

@@ -52,6 +52,12 @@ SID = re.compile(r"^[0-9a-f]{32}$")
 
 
 # ---------------------------------------------------------------- pages & info
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    """Browsers and bookmarks request /favicon.ico at the site root."""
+    return FileResponse(WEB / "favicon.ico", media_type="image/x-icon")
+
+
 @app.get("/")
 def index():
     return FileResponse(WEB / "index.html")
@@ -174,7 +180,7 @@ def source_file(path: str):
 
 
 # ---------------------------------------------------------------- docs & evaluation
-DOCS = {"log": "docs/CONVERSATION_LOG.md"}  # the only document shown in the app (Agentic usage)
+DOCS = {"log": "docs/CONVERSATION_LOG.md", "production": "docs/PRODUCTION.md"}  # documents shown in the app (Agentic usage, Production)
 
 
 @app.get("/api/docs/{name}")

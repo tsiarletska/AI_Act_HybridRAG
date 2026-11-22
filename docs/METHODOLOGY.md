@@ -11,6 +11,7 @@ Detailed records live elsewhere; this file ties them together:
 | Chunking assessment | `docs/CHUNKING.md` |
 | Key prompt, conversation log, validation notes | `docs/CONVERSATION_LOG.md` |
 | Architecture diagram | `docs/architecture.html` |
+| Feasibility, risks, scalability and running cost | `docs/PRODUCTION.md` |
 | Raw results | `evals/results/*.json` |
 
 Status on 2026-11-20: milestones M0–M4 and M6 are built, and the 1,000-case end-to-end dataset and its runner are ready. Open: the end-to-end run and the Gemini vs Mistral decision (M5, waiting for Gemini credits and the user's dataset review), deployment to Railway (M7) and the final deliverables (M8). Sections marked **Planned** describe method that is designed but not yet run.
@@ -140,10 +141,10 @@ Recitals are down-weighted (×0.8). If the embedding API fails, search falls bac
   | Grounding / citations / clarity | 9.65 / 9.57 / 9.06 | 9.63 / 9.55 / 9.02 | 9.71 / 9.64 / 9.35 |
   | Deterministic pass (shared cases) | 592 | 605 | 611 |
   | Expected facts found | 614 | 611 | 601 |
-  | First word p50 / p90 / max | 1.8 / 2.2 / 67 s | 6.3 / 10.0 / 19 s | 6.8 / 26.2 / 103 s |
+  | Answer model, first token p50 / p90 / max | 1.8 / 2.2 / 67 s | 6.3 / 10.0 / 19 s | 6.8 / 26.2 / 103 s |
   | Answer cost, 1,000 cases | $1.79 | $3.46 | $1.98 |
 
-  Reasoning brought no measurable quality gain, for either provider. Case by case, Gemini medium beat Gemini low on 123 cases and lost on 126, a symmetric spread that looks like judge and sampling noise. The higher deterministic pass rates of runs 2 and 3 come from `citations_valid`, the check suspected of being too strict, not from facts (where Gemini without reasoning is highest). Mistral writes shorter, clearer answers that leave out more. Decision basis: Gemini 3.8 Flash without reasoning gives the same quality at about a quarter of the time to first word and half the cost of either reasoning setup.
+  Reasoning brought no measurable quality gain, for either provider. Case by case, Gemini medium beat Gemini low on 123 cases and lost on 126, a symmetric spread that looks like judge and sampling noise. The higher deterministic pass rates of runs 2 and 3 come from `citations_valid`, the check suspected of being too strict, not from facts (where Gemini without reasoning is highest). Mistral writes shorter, clearer answers that leave out more. Decision basis: Gemini 3.8 Flash without reasoning gives the same quality at about a quarter of the time to first word and half the cost of either reasoning setup. The first-token times are the answer model alone; for the selected setup, the user waits 3.3 s median and 4.1 s p95 for the first word, including the floor, guard and retrieval.
 - Prices are kept with effective dates in `app/pricing.yaml`; cost is computed from the token usage the API returns.
 
 **Prompts** (`app/chat/prompts.py`):

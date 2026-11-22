@@ -12,9 +12,11 @@ all three runs answered.
 |---|---|---|---|
 | Judge overall (0-10) | 9.12 | 9.09 | 9.13 |
 | Expected facts found (of 676) | 614 | 611 | 601 |
-| Time to first token, median / p90 | 1.8 s / 2.2 s | 6.3 s / 10.0 s | 6.8 s / 26.2 s |
+| Answer model, first token, median / p90 | 1.8 s / 2.2 s | 6.3 s / 10.0 s | 6.8 s / 26.2 s |
 | Answer cost, 1,000 cases | $1.79 | $3.46 | $1.98 |
 | Blind human review, 99 cases (0-10) | 8.82 | 8.99 | 9.05 |
+
+The first-token times are the answer model alone. What the user waits for the first word of the selected setup, including the floor, guard and retrieval, is 3.3 s median and 4.1 s p95 (`latency_by_path` in the run 1 JSON).
 
 **Decision:** Gemini without reasoning. Quality is tied on the judge (differences under the judge's own run-to-run
 variation of about 0.1), and the human reviewer leaned towards Mistral (45 vs 27 case wins, not significant after
