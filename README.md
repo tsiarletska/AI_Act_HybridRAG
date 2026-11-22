@@ -2,7 +2,8 @@
 
 A question-answering assistant for the **EU Artificial Intelligence Act** (Regulation (EU) 2024/1689, original text, OJ 12.7.2024). Ask a question in plain English and get an answer grounded in the text of the Act, with every statement cited to the article, paragraph, annex or recital it comes from, linked to EUR-Lex.
 
-**Repository:** https://github.com/tsiarletska/AI_Act_HybridRAG
+- **Live web site:** [aiacthybridrag-production.up.railway.app](https://aiacthybridrag-production.up.railway.app)
+- **GitHub repository:** [github.com/tsiarletska/AI_Act_HybridRAG](https://github.com/tsiarletska/AI_Act_HybridRAG)
 
 ## How it works
 
