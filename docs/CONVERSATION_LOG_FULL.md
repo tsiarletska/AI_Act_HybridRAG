@@ -1120,6 +1120,15 @@ Proposed, not built: delete on "New conversation", deletion after 24 hours idle,
 
 **Agent actions:** added both links under "Original text, OJ 12.7.2024" (`app/web/index.html`, `.side-doc-links` in `styles.css`; muted, underlined, wrapping on narrow screens), committed and pushed to `main`.
 
+### Turn 105 — 2026-11-22 · User limits explained; handover package; README
+
+**User:** asked to be guided through the user limits in the application and for the handover materials without `.env`; then "ye do the README file".
+
+**Agent actions:**
+- Explained the limits from `app/config.py` and `app/guards/ratelimit.py` (8 per minute and 100 per day per visitor, 1,500 per day in total, 30 turns, 2,000 characters; all Railway variables; counters in memory; worst case about $4 a day) and suggested a spend cap in Google billing as a second safety net.
+- Built the handover zip with `git archive` (tracked files only, so no `.env`, `.venv`, database or caches) and scanned it for API-key patterns: none.
+- Wrote `README.md`: what it is, live demo and repository links, how it works, results in brief, run locally and with Docker, tests and evaluations, configuration and limits, Railway deployment, layout, documentation map, limitations, contact. Added `ANTHROPIC_API_KEY` to `.env.example`. Committed, pushed and rebuilt the zip.
+
 ---
 
 ## How the output was validated
