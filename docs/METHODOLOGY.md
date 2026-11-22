@@ -372,7 +372,7 @@ Each bug found was fixed with a test where possible.
 - **A failed post-check does not regenerate the answer.** After the checker fix (2026-11-21: comma-joined, shorthand, range, dotted and parent-paragraph citation forms; 9 new tests), answers with an unverified citation fell from 7.6% to 0.4% in run 1 (Gemini with reasoning and Mistral: 0). The remaining genuine cases are marked in red at the citation, using the server's per-citation verdict, but the answer is not blocked or regenerated.
 - **No mechanism to improve the system from user feedback.** Users cannot rate an answer or report a problem, and nothing they do feeds back into the prompts, the retrieval or the evaluation set; quality is known only from the offline evaluations. A feedback box and per-answer ratings were proposed but not built (PLAN §8, item 3).
 - **Multilingual designed, not built.** The design and a first retrieval experiment (E8) exist; building and validating five languages went beyond the project's time and budget.
-- **Deployment hardening:** proxy-header trust for rate limiting behind Railway's proxy; the SQLite database must live on a Railway volume to survive redeploys.
+- **Deployment:** live on Railway since 2026-11-22 (https://aiacthybridrag-production.up.railway.app), one container, no volume, so stored conversations are reset on every redeploy. Checked live: the rate limit counts per visitor (after more than 8 requests within a minute, further ones are refused), and a client-sent `X-Real-IP` or `X-Forwarded-For` header did not get around it, because Railway's proxy sets `X-Real-IP` itself.
 
 ---
 

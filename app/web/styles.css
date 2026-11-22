@@ -44,6 +44,9 @@ svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width:
   border: 1px solid var(--line); font-weight: 600; color: var(--muted); flex: none; }
 .side-doc-title { font-weight: 500; font-size: 13px; }
 .side-doc-sub { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.side-doc-links { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; font-size: 12px; line-height: 1.4; min-width: 0; }
+.side-doc-links a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; overflow-wrap: anywhere; }
+.side-doc-links a:hover, .side-doc-links a:focus-visible { color: var(--ink); }
 .side-label { font-size: 12px; color: var(--muted); padding: 8px 8px 6px; }
 .tabs { display: flex; flex-direction: column; gap: 1px; }
 .tabs button { display: flex; align-items: center; gap: 10px; width: 100%; border: 0; background: none; padding: 7px 8px;

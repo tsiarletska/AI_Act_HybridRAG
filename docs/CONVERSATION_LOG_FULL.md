@@ -1104,6 +1104,22 @@ Proposed, not built: delete on "New conversation", deletion after 24 hours idle,
 - Made the favicon from the § mark the sidebar already uses (dark rounded square, white §): `app/web/favicon.svg` (scales to any size), `favicon.ico` with 16, 32 and 48 px for older browsers and bookmarks, and a 180 px `apple-touch-icon.png` for iOS home screens. Linked them in `index.html` and served `/favicon.ico` at the site root (`app/api.py`). 98 tests pass.
 - Committed the day's work (production page, evaluation tiles, favicon, documentation fixes) and pushed it to `main`.
 
+### Turn 103 — 2026-11-22 · Deployment on Railway
+
+**User:** created the Railway project and asked whether a separate backend, frontend and SQLite were needed; then reported a crash after the first deploy, added the key, generated the domain, and sent the URL: https://aiacthybridrag-production.up.railway.app.
+
+**Agent actions:**
+- Explained that one service is enough: FastAPI serves both the API and the web page, and SQLite is a file inside the container. A volume is optional, and must be mounted at `/data` with `DB_PATH=/data/app.sqlite3`, never at `/app/data`, where the chunks and embeddings live.
+- The crash came from the missing `GEMINI_API_KEY` (the embedding client is created at start-up). Advised setting `PORT=8080` as a variable and as the domain's target port.
+- Found and fixed `.dockerignore` excluding all PNG files, which kept the new Apple touch icon out of the image (commit `a45d2a7`).
+- Checked the live site: all pages and API endpoints return 200 in about 0.25 s; a fines question answered correctly with [Art. 99(3)] and [Art. 100(2)]; first words after 2.8–3.7 s (3.3 s median locally); weather refused in 0.55 s. Rate limit: after more than 8 requests within a minute (code requests, which the pre-filter refuses at no API cost), further requests were refused with `rate_limit`; requests with a forged `X-Real-IP` / `X-Forwarded-For` were still refused, so Railway sets `X-Real-IP` itself and the limit counts per visitor. Updated the METHODOLOGY limitation.
+
+### Turn 104 — 2026-11-22 · Contact and repository link in the sidebar
+
+**User:** asked to add their email under the regulation block in the sidebar, and a link to the GitHub repository with the text "GitHub repo", then push so they can redeploy on Railway.
+
+**Agent actions:** added both links under "Original text, OJ 12.7.2024" (`app/web/index.html`, `.side-doc-links` in `styles.css`; muted, underlined, wrapping on narrow screens), committed and pushed to `main`.
+
 ---
 
 ## How the output was validated
